@@ -1,7 +1,7 @@
-package com.dudu.soa.basedata.sms.mapper;
+package com.dudu.soa.messagecenter.mapper;
 
-import com.dudu.soa.message.basedata.sms.module.AccessKey;
-import com.dudu.soa.message.basedata.sms.module.TemplateCode;
+import com.dudu.soa.messagecenter.module.AccessKey;
+import com.dudu.soa.messagecenter.module.TemplateCode;
 //查询AccessKey实体用于获取调用阿里云接口的参数
 public interface SendSmsDao {
 	/*

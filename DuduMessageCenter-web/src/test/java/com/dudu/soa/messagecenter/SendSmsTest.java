@@ -1,12 +1,12 @@
-package com.dudu.soa.basedata.sms.sendsms.service;
+package com.dudu.soa.messagecenter;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.dudu.soa.basedata.sms.service.SendSmsService;
-import com.dudu.soa.message.basedata.sms.module.ParameterEntry;
+import com.dudu.soa.messagecenter.module.ParameterEntry;
+import com.dudu.soa.messagecenter.service.SendSmsService;
 import com.mchange.v2.beans.swing.TestBean;
 import com.sun.tools.javac.util.List;
 
