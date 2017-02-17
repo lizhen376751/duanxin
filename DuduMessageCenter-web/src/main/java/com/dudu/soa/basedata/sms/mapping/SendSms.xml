@@ -4,53 +4,36 @@
 <mapper namespace="com.dudu.soa.basedata.sms.mapper.SendSmsDao">
 <resultMap type="com.dudu.soa.message.basedata.sms.module.AccessKey" id="accessKey">
 <id property="id" column="id"/>
-<result property="shopCode" column="shopcode"/>
-<result property="typeName" column="typename"/>
+<result property="appkey" column="appkey"/>
+<result property="appSecret" column="appSecret"/>
+<result property="signName" column="signName"/>
+<result property="shopcode" column="shopcode"/>
 </resultMap>
-<resultMap type="com.dudu.soa.message.basedata.sms.module.AccessKey" id="asset">
+<resultMap type="com.dudu.soa.message.basedata.sms.module.TemplateCode" id="templateCode">
 <id property="id" column="id"/>
 <result property="shopCode" column="shopcode"/>
-<result property="typeName" column="typename"/>
+<result property="templateCode" column="templateCode"/>
+<result property="businessType" column="businessType"/>
 </resultMap>
 
-<select id="queryList" parameterType="com.dudu.soa.basedata.asset.module.Asset" resultMap="asset">
-select t.*
-	from data_assettype_t t
-	inner join (select #{shopCode} as code union all select shopcode2 from DATA_Shop_Shop where shopcode1=#{shopCode})
-	 as ls on t.shopcode=ls.code
-<if test="typeName!=null">
-where typename like '%'+ #{typeName}+'%'
-</if>
-</select>
-<select id="getAsset" parameterType="com.dudu.soa.basedata.asset.module.Asset" resultMap="asset">
-select t.*
-	from data_assettype_t t
-	inner join (select #{shopCode} as code union all select shopcode2 from DATA_Shop_Shop where shopcode1=#{shopCode})
-	 as ls on t.shopcode=ls.code
-	where id = #{id}
-</select>
-<select id="queryByTypeName" parameterType="com.dudu.soa.basedata.asset.module.Asset" resultMap="asset">
-select t.*
-	from data_assettype_t t
-	inner join (select #{shopCode} as code union all select shopcode2 from DATA_Shop_Shop where shopcode1=#{shopCode})
-	 as ls on t.shopcode=ls.code
-	 where typename = #{typeName}
-	 <if test="id!=null">	
-	and id != #{id}	
-	</if>
-</select>
-<insert id="addAsset" parameterType="com.dudu.soa.basedata.asset.module.Asset" >
-insert into data_assettype_t(shopcode , typename)
- values (
- #{shopCode},
- #{typeName}
- )
-</insert>
-<update id="updateAsset" parameterType="com.dudu.soa.basedata.asset.module.Asset">
-update data_assettype_t set typename =#{typeName} where id = #{id}
-</update>
+<select id="queryAccessKey" parameterType="String" resultMap="accessKey">
+select
+ 	a.appkey,a.appSecret,a.shopcode,a.shopcode 
+FROM 
+	SMS_AccessKey a 
+where  
+	a.shopcode = #{shopCode}
 
-<delete id="deleteAsset" parameterType="com.dudu.soa.basedata.asset.module.Asset">
-delete from data_assettype_t where id = #{id}
-</delete>
+</select>
+<select id="queryTemplateCode" parameterType="String" resultMap="templateCode">
+select 
+	b.businessType,b.shopCode,b.templateCode
+ FROM 
+ 	SMS_TemplateCode b 
+where 
+	b.shopCode = #{shopCode} 
+and 
+	businessType = #{businessType}
+</select>
+
 </mapper>

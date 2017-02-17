@@ -10,7 +10,7 @@ public class ParameterEntry implements Serializable{
 	//车主名字
 	public String ownerName;
 	
-	//日期(消费日期,生日日期...)
+	//日期(如:消费日期,生日日期...)
 	public String date;
 	
 	//赠送金额
