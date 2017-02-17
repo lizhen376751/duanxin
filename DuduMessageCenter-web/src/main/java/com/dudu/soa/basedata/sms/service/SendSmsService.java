@@ -1,9 +1,12 @@
-package com.dudu.soa.basedata.sms.impl;
+package com.dudu.soa.basedata.sms.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -20,44 +23,28 @@ import com.dudu.soa.message.basedata.sms.module.ParameterEntry;
 import com.dudu.soa.message.basedata.sms.module.TemplateCode;
 
 @Service
-public class SendSmsImpl implements ApiSendSms{
+public class SendSmsService implements ApiSendSms{
 	
 	 @Autowired
 	 private SendSmsDao sendSmsDao;
 	
-	 private final static String APP_KEY = "LTAIMIvaC6bOkP2t"; 
-	 private final static String APP_SECRET = "01ioS3P5a5CabpN1dQxlLP9vOTe3xz"; //AppSecret从控制台获取
-	 private final static String SIGN_NAME = "祝生日快乐"; // (传参)签名名称从控制台获取，必须是审核通过的,加载最前面的
-	 private final static String TEMPLATE_CODE = "SMS_47015002"; //(传参)模板CODE从控制台获取，必须是审核通过的
+//	 private final static String APP_KEY = "LTAIMIvaC6bOkP2t"; 
+//	 private final static String APP_SECRET = "01ioS3P5a5CabpN1dQxlLP9vOTe3xz"; //AppSecret从控制台获取
+//	 private final static String SIGN_NAME = "祝生日快乐"; // (传参)签名名称从控制台获取，必须是审核通过的,加载最前面的
+//	 private final static String TEMPLATE_CODE = "SMS_47015002"; //(传参)模板CODE从控制台获取，必须是审核通过的
 	 private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
 	 private final static String REGIONID = "";
 	
 
-public void sample() {  
 	
-    try {
-    	
-    IClientProfile profile = DefaultProfile.getProfile(REGIONID, APP_KEY, APP_SECRET);
-     DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms",  HOST);
-    IAcsClient client = new DefaultAcsClient(profile);
-    SingleSendSmsRequest request = new SingleSendSmsRequest();
-        request.setSignName(SIGN_NAME);//控制台创建的签名名称
-         request.setTemplateCode(TEMPLATE_CODE);//控制台创建的模板CODE
-        request.setParamString("{\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\"}");//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-        //request.setParamString("{}");
-        request.setRecNum("18560042032");//接收号码
-        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
-    
-    } catch (ServerException e) {
-        e.printStackTrace();
-    }
-    catch (ClientException e) {
-        e.printStackTrace();
-    }
-}
-
+		
+	    public void addIntroduced() {
+			Date createrTime=new Date();
+			System.out.println("成功++++++++++++++;;收到;;;;;");
+		}
 
 @Override
+@Transactional
 public void sendSMS(ParameterEntry parameterEntry)  {
 	
 	//获取参数用于赋值给短信中的内容参数
@@ -91,10 +78,18 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	//获取shopcode用于查询店铺的短信签名
 	String shopcode = parameterEntry.getShopcode();
 	
+	//获取消费金额
+	String consumptionMoney = parameterEntry.getConsumptionMoney();
+	
 	//发送的手机号码
 	List<String> recnum = parameterEntry.getRecnum();
-	String sendPhone ;
+	String sendPhone = "";
 	for(int i=0;i<recnum.size();i++){
+		sendPhone+=recnum.get(i);
+		if(i>0){
+			sendPhone+=",";
+			sendPhone+=recnum.get(i);
+		}
 		
 	}
 	
@@ -121,18 +116,15 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	IAcsClient client = new DefaultAcsClient(profile);
 	    SingleSendSmsRequest request = new SingleSendSmsRequest();
 	        request.setSignName(signName);//控制台创建的签名名称
-	         request.setTemplateCode(templateCode);//控制台创建的模板CODE
-	         String name="{\"ownerName\":\"嘟嘟客户\",\"date\":\"嘟嘟车网\","
-	        		+ "\"giveMoney\":\"嘟嘟客户\",\"storeName\":\"嘟嘟车网\","
-	        		+ "\"consumptiondetails\":\"嘟嘟客户\",\"apliaydetails\":\"嘟嘟车网\","
-	        		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\"}";
-	        request.setParamString("{\"ownerName\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-	        		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-	        		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-	        		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-	        		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\"}");//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-	        //request.setParamString("{}");
-	        request.setRecNum("18560042032");//接收号码
+	        request.setTemplateCode(templateCode);//控制台创建的模板CODE
+//	        String moban="{\"ownerName\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
+//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
+//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
+//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
+//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\"}";
+	        String params="{\"ownerName\":"+ownerName+",\"date\":"+date+",\"giveMoney\":"+giveMoney+",\"storeName\":"+storeName+",\"consumptiondetails\":"+consumptiondetails+",\"apliaydetails\":"+apliaydetails+"}";
+	        request.setParamString(params);//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+	        request.setRecNum(sendPhone);//接收号码
 	        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
 	 } catch (ServerException e) {
 	        e.printStackTrace();
@@ -141,6 +133,25 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	        e.printStackTrace();
 	    }
 	
+}
+public  static void main(String agrs[]){
+	SendSmsService sms = new SendSmsService();
+	ParameterEntry parameterEntry = new ParameterEntry();
+	ArrayList<String> recnum = new ArrayList<String>();
+	recnum.add("18560042032");
+	parameterEntry.setShopcode("0533001");
+	parameterEntry.setBusinessType("happybrithyday");
+	parameterEntry.setRecnum(recnum);
+	parameterEntry.setAllMoney("1000");
+	parameterEntry.setApliaydetails("微信支付");
+	parameterEntry.setConsumptiondetails("洗车打蜡一次");
+	parameterEntry.setConsumptionMoney("100");
+	parameterEntry.setDate("2017-2-17 12:27");
+	parameterEntry.setGiveMoney("10");
+	parameterEntry.setOwnerName("lizhen");
+	parameterEntry.setResidueMoney("910");
+	parameterEntry.setStoreName("嘟嘟洗车");
+	sms.sendSMS(parameterEntry);
 }
 	
 }

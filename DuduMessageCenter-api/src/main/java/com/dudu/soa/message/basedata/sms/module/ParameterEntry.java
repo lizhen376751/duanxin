@@ -25,7 +25,7 @@ public class ParameterEntry implements Serializable{
 	//店铺名字
 	public String storeName;
 	
-	//消费详情(购买物品..)
+	//消费详情(如购买什么物品..)
 	public String consumptiondetails;
 	
 	//支付详情(支付方式)
@@ -39,9 +39,20 @@ public class ParameterEntry implements Serializable{
 	
 	//发送的手机号码
 	public List<String> recnum;
+	
+	//消费金额
+	public String consumptionMoney;
 
 	public String getOwnerName() {
 		return ownerName;
+	}
+
+	public String getConsumptionMoney() {
+		return consumptionMoney;
+	}
+
+	public void setConsumptionMoney(String consumptionMoney) {
+		this.consumptionMoney = consumptionMoney;
 	}
 
 	public void setOwnerName(String ownerName) {
@@ -130,13 +141,13 @@ public class ParameterEntry implements Serializable{
 
 	@Override
 	public String toString() {
-		return "parameterEntry [ownerName=" + ownerName + ", date=" + date
+		return "ParameterEntry [ownerName=" + ownerName + ", date=" + date
 				+ ", giveMoney=" + giveMoney + ", residueMoney=" + residueMoney
 				+ ", allMoney=" + allMoney + ", storeName=" + storeName
 				+ ", consumptiondetails=" + consumptiondetails
 				+ ", apliaydetails=" + apliaydetails + ", businessType="
 				+ businessType + ", shopcode=" + shopcode + ", recnum="
-				+ recnum + "]";
+				+ recnum + ", consumptionMoney=" + consumptionMoney + "]";
 	}
 	
 }
