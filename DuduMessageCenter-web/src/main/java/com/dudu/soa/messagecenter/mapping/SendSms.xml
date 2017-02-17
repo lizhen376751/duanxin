@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dudu.soa.basedata.sms.mapper.SendSmsDao">
+<mapper namespace="com.dudu.soa.messagecenter.mapper.SendSmsDao">
 
-<resultMap type="com.dudu.soa.message.basedata.sms.module.AccessKey" id="accessKey">
+<resultMap type="com.dudu.soa.messagecenter.module.AccessKey" id="accessKey">
 <id property="id" column="id"/>
 <result property="appkey" column="appkey"/>
 <result property="appSecret" column="appSecret"/>
 <result property="signName" column="signName"/>
 <result property="shopcode" column="shopcode"/>
 </resultMap>
-<resultMap type="com.dudu.soa.message.basedata.sms.module.TemplateCode" id="templateCode">
+<resultMap type="com.dudu.soa.messagecenter.module.TemplateCode" id="templateCode">
 <id property="id" column="id"/>
 <result property="shopCode" column="shopcode"/>
 <result property="templateCode" column="templateCode"/>
@@ -19,7 +19,7 @@
 
 <select id="queryAccessKey" parameterType="String" resultMap="accessKey">
 select top 1
- 	a.appkey,a.appSecret,a.shopcode,a.shopcode 
+ 	a.appkey,a.appSecret,a.shopcode,a.shopcode ,a.signName
 FROM 
 	SMS_AccessKey a 
 where  
@@ -32,9 +32,9 @@ select
  FROM 
  	SMS_TemplateCode b 
 where 
-	b.shopCode = #{shopCode} 
+	b.shopCode =  #{0}
 and 
-	businessType = #{businessType}
+	b.businessType = #{1}
 </select>
 
 </mapper>

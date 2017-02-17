@@ -21,8 +21,7 @@
      -->
 
     <!-- 自动加载配置文件 -->
-    <bean id="DuduSpiderBaseConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesMode" value="2"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
@@ -48,12 +47,12 @@
     <!-- 开启AOP -->
     <aop:aspectj-autoproxy/>
 
-    <bean id="DataSource_DuduSpider" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+    <bean id="DataSource_DuduMessageCenter" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
         <property name="name" value="${app.name}"/>
-        <property name="url" value="${DuduSpider.url}"/>
-        <property name="username" value="${DuduSpider.username}"/>
-        <property name="password" value="${DuduSpider.password}"/>
+        <property name="url" value="${DuduMessageCenter.url}"/>
+        <property name="username" value="${DuduMessageCenter.username}"/>
+        <property name="password" value="${DuduMessageCenter.password}"/>
         <!-- initialSize: 初始化连接  -->
         <property name="filters" value="stat,wall,log4j"/>
     </bean>
@@ -66,11 +65,11 @@
 
     <!-- 事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="DataSource_DuduSpider"/>
+        <property name="dataSource" ref="DataSource_DuduMessageCenter"/>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="DataSource_DuduSpider"/>
+        <property name="dataSource" ref="DataSource_DuduMessageCenter"/>
         <property name="configLocation" value="classpath:conf/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath*:com/dudu/soa/**/mapping/*.xml"/>
     </bean>

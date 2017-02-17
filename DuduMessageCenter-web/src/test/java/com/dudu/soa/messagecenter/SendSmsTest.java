@@ -7,22 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dudu.soa.messagecenter.module.ParameterEntry;
 import com.dudu.soa.messagecenter.service.SendSmsService;
+import com.dudu.soa.messagecenter.service.copy;
 import com.mchange.v2.beans.swing.TestBean;
 import com.sun.tools.javac.util.List;
 
-public class SendSmsTest {
+
+public class SendSmsTest extends TestBase{
 	
 	@Autowired
 	private SendSmsService sendSmsService;
 	
-	@Test
-	public void ss() throws Exception {
-		try{
-		sendSmsService.addIntroduced();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	
 	
 	@Test
 	public void sendSMS() throws Exception{
@@ -30,8 +25,9 @@ public class SendSmsTest {
 		ParameterEntry parameterEntry = new ParameterEntry();
 		ArrayList<String> recnum = new ArrayList<String>();
 		recnum.add("18560042032");
+		recnum.add("17076081635");
 		parameterEntry.setShopcode("0533001");
-		parameterEntry.setBusinessType("happybrithyday");
+		parameterEntry.setBusinessType("money");
 		parameterEntry.setRecnum(recnum);
 		parameterEntry.setAllMoney("1000");
 		parameterEntry.setApliaydetails("微信支付");
