@@ -1,4 +1,4 @@
-package com.dudu.soa.basedata.sms.service;
+package com.dudu.soa.messagecenter.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +16,11 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
 import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
-import com.dudu.soa.basedata.sms.mapper.SendSmsDao;
-import com.dudu.soa.message.basedata.sms.api.ApiSendSms;
-import com.dudu.soa.message.basedata.sms.module.AccessKey;
-import com.dudu.soa.message.basedata.sms.module.ParameterEntry;
-import com.dudu.soa.message.basedata.sms.module.TemplateCode;
+import com.dudu.soa.messagecenter.api.ApiSendSms;
+import com.dudu.soa.messagecenter.mapper.SendSmsDao;
+import com.dudu.soa.messagecenter.module.AccessKey;
+import com.dudu.soa.messagecenter.module.ParameterEntry;
+import com.dudu.soa.messagecenter.module.TemplateCode;
 
 @Service
 public class SendSmsService implements ApiSendSms{

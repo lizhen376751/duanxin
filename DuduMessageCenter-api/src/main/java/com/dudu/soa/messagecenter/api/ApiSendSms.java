@@ -1,6 +1,6 @@
-package com.dudu.soa.message.basedata.sms.api;
+package com.dudu.soa.messagecenter.api;
 
-import com.dudu.soa.message.basedata.sms.module.ParameterEntry;
+import com.dudu.soa.messagecenter.module.ParameterEntry;
 
 public interface ApiSendSms {
 	

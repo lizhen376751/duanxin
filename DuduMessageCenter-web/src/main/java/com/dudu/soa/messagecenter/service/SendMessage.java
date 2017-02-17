@@ -1,4 +1,4 @@
-package com.dudu.soa.basedata.sms.service;
+package com.dudu.soa.messagecenter.service;
 
 
 import com.aliyuncs.DefaultAcsClient;

@@ -1,4 +1,4 @@
-package com.dudu.soa.message.basedata.sms.module;
+package com.dudu.soa.messagecenter.module;
 
 import java.io.Serializable;
 
