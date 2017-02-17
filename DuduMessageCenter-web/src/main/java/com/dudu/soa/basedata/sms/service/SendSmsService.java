@@ -27,24 +27,16 @@ public class SendSmsService implements ApiSendSms{
 	
 	 @Autowired
 	 private SendSmsDao sendSmsDao;
-	
-//	 private final static String APP_KEY = "LTAIMIvaC6bOkP2t"; 
-//	 private final static String APP_SECRET = "01ioS3P5a5CabpN1dQxlLP9vOTe3xz"; //AppSecret从控制台获取
-//	 private final static String SIGN_NAME = "祝生日快乐"; // (传参)签名名称从控制台获取，必须是审核通过的,加载最前面的
-//	 private final static String TEMPLATE_CODE = "SMS_47015002"; //(传参)模板CODE从控制台获取，必须是审核通过的
+	 
 	 private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
 	 private final static String REGIONID = "";
 	
-
-	
-		
 	    public void addIntroduced() {
 			Date createrTime=new Date();
 			System.out.println("成功++++++++++++++;;收到;;;;;");
 		}
 
 @Override
-@Transactional
 public void sendSMS(ParameterEntry parameterEntry)  {
 	
 	//获取参数用于赋值给短信中的内容参数
@@ -94,6 +86,11 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	}
 	
 	//获取AccessKey实体
+//	AccessKey accessKey =  new AccessKey();
+//	accessKey.setAppkey("LTAItFAKjkOvqssX");
+//	accessKey.setAppSecret("bmjmiW2SYYGnqmSyNLWXA94yP5AKGj");
+//	accessKey.setSignName("生日祝福");
+//	accessKey.setShopcode("0533001");
 	AccessKey queryAccessKey = sendSmsDao.queryAccessKey(shopcode);
 	
 	String appkey = queryAccessKey.getAppkey();
@@ -102,7 +99,12 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	
 	//短信签名
 	String signName = queryAccessKey.getSignName();
-	
+//	
+//	TemplateCode param = new TemplateCode();
+//	param.setId(1);
+//	param.setShopCode("0533001");
+//	param.setTemplateCode("SMS_47430145");
+//	param.setBusinessType("happybrithyday");
 	//获取短信模板TemplateCode实体
 	TemplateCode queryTemplateCode = sendSmsDao.queryTemplateCode(shopcode, businessType);
 	
@@ -117,13 +119,9 @@ public void sendSMS(ParameterEntry parameterEntry)  {
 	    SingleSendSmsRequest request = new SingleSendSmsRequest();
 	        request.setSignName(signName);//控制台创建的签名名称
 	        request.setTemplateCode(templateCode);//控制台创建的模板CODE
-//	        String moban="{\"ownerName\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\","
-//    		+ "\"name\":\"嘟嘟客户\",\"shopname\":\"嘟嘟车网\"}";
-	        String params="{\"ownerName\":"+ownerName+",\"date\":"+date+",\"giveMoney\":"+giveMoney+",\"storeName\":"+storeName+",\"consumptiondetails\":"+consumptiondetails+",\"apliaydetails\":"+apliaydetails+"}";
-	        request.setParamString(params);//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+	        String params="";
+//	        String params="{\"ownerName\":"+ownerName+",\"date\":"+date+",\"giveMoney\":"+giveMoney+",\"storeName\":"+storeName+",\"consumptiondetails\":"+consumptiondetails+",\"apliaydetails\":"+apliaydetails+"}";
+	        request.setParamString("{\"ownerName\":\"嘟嘟客户\",\"storeName\":\"嘟嘟车网\"}");//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
 	        request.setRecNum(sendPhone);//接收号码
 	        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
 	 } catch (ServerException e) {
