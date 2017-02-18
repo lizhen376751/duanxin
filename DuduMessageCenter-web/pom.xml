@@ -10,10 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>DuduMessageCenter-web</artifactId>
     <version>${parent.version}</version>
-    <packaging>jar</packaging>
 
     <dependencies>
-         
         <dependency>
             <groupId>com.dudu.soa</groupId>
             <artifactId>DuduFramework-parent-dubbo</artifactId>
