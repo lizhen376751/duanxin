@@ -1,7 +1,9 @@
-/.project
+.project
 /.idea
 /target
 /*/target
 *.iml
 *.log
 /**/*logs*
+/.settings
+/**/.settings
