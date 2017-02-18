@@ -25,7 +25,7 @@ public class SendSmsTest extends TestBase{
 		ParameterEntry parameterEntry = new ParameterEntry();
 		ArrayList<String> recnum = new ArrayList<String>();
 		recnum.add("18560042032");
-		recnum.add("17076081635");
+//		recnum.add("17076081635");
 		parameterEntry.setShopcode("0533001");
 		parameterEntry.setBusinessType("money");
 		parameterEntry.setRecnum(recnum);
