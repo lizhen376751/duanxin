@@ -13,6 +13,7 @@
     <packaging>jar</packaging>
 
     <dependencies>
+         
         <dependency>
             <groupId>com.dudu.soa</groupId>
             <artifactId>DuduFramework-parent-dubbo</artifactId>
@@ -35,9 +36,19 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>DuduMessageCenter</groupId>
+            <groupId>com.dudu.soa</groupId>
             <artifactId>DuduMessageCenter-api</artifactId>
             <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.aliyun</groupId>
+        	<artifactId>aliyun-java-sdk-sms</artifactId>
+        	<version>3.0.0-rc1</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.aliyun</groupId>
+        	<artifactId>aliyun-java-sdk-core</artifactId>
+        	<version>2.4.2</version>
         </dependency>
     </dependencies>
     <build>
