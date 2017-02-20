@@ -19,7 +19,7 @@ public class SendSmsTest extends TestBase{
 	
 	
 	
-	@Test
+	//@Test
 	public void sendSMS() throws Exception{
 		try{
 		ParameterEntry parameterEntry = new ParameterEntry();

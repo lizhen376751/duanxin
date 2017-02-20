@@ -9,6 +9,4 @@ public interface ApiSendSms {
 	 *  ParameterEntry实体类,没有配置默认为空
 	 */
 	public void sendSMS(ParameterEntry parameterEntry);
-	
-	
 }
