@@ -7,6 +7,9 @@ import java.util.List;
  * 调用短信接口所需要的参数封装为实体类
  */
 public class ParameterEntry implements Serializable{
+	//卡号
+	public String cardnum;
+	
 	//车主名字
 	public String ownerName;
 	
