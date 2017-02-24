@@ -10,6 +10,7 @@ public class ParameterEntry implements Serializable{
 	//卡号
 	public String cardnum;
 	
+	
 	//车主名字
 	public String ownerName;
 	
@@ -45,6 +46,14 @@ public class ParameterEntry implements Serializable{
 	
 	//消费金额
 	public String consumptionMoney;
+	
+	public String getCardnum() {
+		return cardnum;
+	}
+
+	public void setCardnum(String cardnum) {
+		this.cardnum = cardnum;
+	}
 
 	public String getOwnerName() {
 		return ownerName;
@@ -144,13 +153,14 @@ public class ParameterEntry implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ParameterEntry [ownerName=" + ownerName + ", date=" + date
-				+ ", giveMoney=" + giveMoney + ", residueMoney=" + residueMoney
-				+ ", allMoney=" + allMoney + ", storeName=" + storeName
-				+ ", consumptiondetails=" + consumptiondetails
-				+ ", apliaydetails=" + apliaydetails + ", businessType="
-				+ businessType + ", shopcode=" + shopcode + ", recnum="
-				+ recnum + ", consumptionMoney=" + consumptionMoney + "]";
+		return "ParameterEntry [cardnum=" + cardnum + ", ownerName="
+				+ ownerName + ", date=" + date + ", giveMoney=" + giveMoney
+				+ ", residueMoney=" + residueMoney + ", allMoney=" + allMoney
+				+ ", storeName=" + storeName + ", consumptiondetails="
+				+ consumptiondetails + ", apliaydetails=" + apliaydetails
+				+ ", businessType=" + businessType + ", shopcode=" + shopcode
+				+ ", recnum=" + recnum + ", consumptionMoney="
+				+ consumptionMoney + "]";
 	}
 	
 }
