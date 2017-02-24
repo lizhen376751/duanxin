@@ -10,7 +10,6 @@ public class ParameterEntry implements Serializable{
 	//卡号
 	public String cardnum;
 	
-	
 	//车主名字
 	public String ownerName;
 	

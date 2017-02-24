@@ -40,8 +40,11 @@ public class SendSmsService implements ApiSendSms{
 	 public void sendSMS(ParameterEntry parameterEntry)  {
 	
 		//获取参数用于赋值给短信中的内容参数
-		////车主名字
+		//车主名字
 		String ownerName = parameterEntry.getOwnerName();
+		
+		//项目卡号
+		String cardnum = parameterEntry.getCardnum();
 		
 		//日期(如:消费日期,生日日期...)
 		String date = parameterEntry.getDate();
@@ -116,6 +119,7 @@ public class SendSmsService implements ApiSendSms{
 		        node.put("consumptiondetails", consumptiondetails);
 		        node.put("consumptionMoney", consumptionMoney);
 		        node.put("apliaydetails", apliaydetails);
+		        node.put("cardnum",cardnum);
 		        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
 		        request.setRecNum(sendPhone);//接收号码
 		        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
