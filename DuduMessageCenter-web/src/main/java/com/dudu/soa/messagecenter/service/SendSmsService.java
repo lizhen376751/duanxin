@@ -35,8 +35,10 @@ public class SendSmsService implements ApiSendSms{
 	 private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
 	 private final static String REGIONID = "";
 	
+	 
 
 	 @Override
+	 @Transactional
 	 public void sendSMS(ParameterEntry parameterEntry)  {
 	
 		//获取参数用于赋值给短信中的内容参数
@@ -134,6 +136,92 @@ public class SendSmsService implements ApiSendSms{
 		
 	}
 }
+
+	 @Override
+	 @Transactional
+	 public List<AccessKey> queryListAccessKey(String shopcode){
+		
+			return sendSmsDao.queryListAccessKey(shopcode);
+	 };
+	 
+	@Override
+	@Transactional
+	public AccessKey queryAccessKey(String shopcode) {
+		// TODO Auto-generated method stub
+		return sendSmsDao.queryAccessKey(shopcode);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void addAccessKey(AccessKey accessKey) {
+		sendSmsDao.addAccessKey(accessKey);
+		
+	}
+
+
+
+	@Override
+	@Transactional
+	public void deleteAccessKey(AccessKey accessKey) {
+		// TODO Auto-generated method stub
+		sendSmsDao.deleteAccessKey(accessKey);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void updateAccessKey(AccessKey accessKey) {
+		// TODO Auto-generated method stub
+		sendSmsDao.updateAccessKey(accessKey);
+	}
+
+
+	/*
+	 * 短信模板的查看(查看本店铺所有的短信模板)
+	 */
+	@Override
+	@Transactional
+	public List<TemplateCode> queryListTemplate(String shopcode){
+		// TODO Auto-generated method stub
+		return sendSmsDao.queryListTemplate(shopcode);
+	};
+	
+	@Override
+	@Transactional
+	public TemplateCode queryTemplateCode(String shopcode, String businessType) {
+		// TODO Auto-generated method stub
+		return sendSmsDao.queryTemplateCode(shopcode, businessType);
+	}
+
+	
+
+	@Override
+	@Transactional
+	public void addTemplateCode(TemplateCode templateCode) {
+		// TODO Auto-generated method stub
+		sendSmsDao.addTemplateCode(templateCode);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void DeleteTemplateCode(TemplateCode templateCode) {
+		// TODO Auto-generated method stub
+		sendSmsDao.DeleteTemplateCode(templateCode);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void updateTemplate(TemplateCode templateCode) {
+		// TODO Auto-generated method stub
+		sendSmsDao.updateTemplate(templateCode);
+	}
 		
 
 	

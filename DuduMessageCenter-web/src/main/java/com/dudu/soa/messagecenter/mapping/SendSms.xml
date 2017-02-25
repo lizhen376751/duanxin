@@ -16,19 +16,82 @@
 <result property="templateCode" column="templateCode"/>
 <result property="businessType" column="businessType"/>
 </resultMap>
+<!-- 查看所有的短信签名 -->
+<select id="queryListAccessKey" parameterType="String" resultMap="accessKey">
+select
+ 	id,appkey,appSecret,shopcode,signName
+FROM 
+	SMS_AccessKey 
+where  
+	shopcode = #{shopCode}
+
+</select>
 
 <select id="queryAccessKey" parameterType="String" resultMap="accessKey">
 select top 1
- 	a.appkey,a.appSecret,a.shopcode,a.shopcode ,a.signName
+ 	a.id,a.appkey,a.appSecret,a.shopcode,a.signName
 FROM 
 	SMS_AccessKey a 
 where  
 	a.shopcode = #{shopCode}
 
 </select>
+
+<!-- 短信的参数的新增 -->
+<insert id="addAccessKey" parameterType="com.dudu.soa.messagecenter.module.AccessKey" useGeneratedKeys="true" keyProperty="id" flushCache="true">
+        INSERT INTO SMS_AccessKey (
+	appkey,
+	appSecret,
+	signName,
+	shopcode
+)
+VALUES
+	(
+		#{ appkey }, #{ appSecret }, #{ signName }, #{ shopcode }
+	)
+</insert>
+
+<!-- 短信参数的删除 -->
+<delete id="deleteAccessKey" parameterType="com.dudu.soa.messagecenter.module.AccessKey" >
+    delete from SMS_AccessKey 
+    where id =#{id} 
+</delete> 
+
+<!-- 短信参数的修改 -->
+<update id="updateAccessKey" parameterType="com.dudu.soa.messagecenter.module.AccessKey" flushCache="true">
+    update SMS_AccessKey
+        <trim prefix="set" suffixOverrides=",">
+        <if test="appkey !=null and appkey != ''">  
+            appkey = #{appkey}, 
+        </if>
+        <if test="appSecret !=null and appSecret != ''">  
+            appSecret = #{appSecret},
+        </if>
+         <if test="signName !=null and signName != ''">  
+            signName = #{signName}, 
+        </if>
+        <if test="shopcode !=null and shopcode != ''">  
+            shopcode = #{shopcode}
+        </if>
+        </trim>
+    where 
+        id = #{id}
+        
+</update>
+
+<!--查看本店铺所有的短信模板  -->
+<select id="queryListTemplate" parameterType="String" resultMap="templateCode">
+select 
+	id,businessType,shopCode,templateCode
+ FROM 
+ 	SMS_TemplateCode  
+where 
+	shopCode =  #{shopCode}
+</select>
+
 <select id="queryTemplateCode" parameterType="String" resultMap="templateCode">
 select 
-	b.businessType,b.shopCode,b.templateCode
+	b.id,b.businessType,b.shopCode,b.templateCode
  FROM 
  	SMS_TemplateCode b 
 where 
@@ -36,5 +99,44 @@ where
 and 
 	b.businessType = #{1}
 </select>
+
+<!-- 短信模板的新增 -->
+<insert id="addTemplateCode" parameterType="com.dudu.soa.messagecenter.module.TemplateCode" useGeneratedKeys="true" keyProperty="id" flushCache="true">
+        INSERT INTO SMS_TemplateCode (
+	shopCode,
+	templateCode,
+	businessType
+	
+)
+VALUES
+	(
+		#{shopCode}, #{templateCode}, #{businessType}
+	)
+</insert>
+
+<!-- 短信模板的删除 -->
+<delete id="DeleteTemplateCode" parameterType="com.dudu.soa.messagecenter.module.TemplateCode" >
+    delete from SMS_TemplateCode 
+    where id =#{id} 
+</delete> 
+
+<!-- 短信模板的修改 -->
+<update id="updateTemplate" parameterType="com.dudu.soa.messagecenter.module.TemplateCode" flushCache="true">
+    update SMS_TemplateCode
+        <trim prefix="set" suffixOverrides=",">
+        <if test="shopCode !=null and shopCode != ''">  
+            shopCode = #{shopCode}, 
+        </if>
+        <if test="templateCode !=null and templateCode != ''">  
+            templateCode = #{templateCode},
+        </if>
+         <if test="businessType !=null and businessType != ''">  
+            businessType = #{businessType}
+        </if>
+        </trim>
+    where 
+        id = #{id}
+        
+</update>
 
 </mapper>
