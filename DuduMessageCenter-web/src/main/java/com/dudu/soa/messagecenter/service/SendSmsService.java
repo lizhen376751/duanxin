@@ -97,40 +97,44 @@ public class SendSmsService implements ApiSendSms{
 		
 		//获取短信模板TemplateCode实体
 		TemplateCode queryTemplateCode = sendSmsDao.queryTemplateCode(shopcode, businessType);
+		if(queryTemplateCode != null){
+			//短信模板code
+			String templateCode = queryTemplateCode.getTemplateCode();
+			
+			if(!templateCode.isEmpty() && !"".equals(templateCode) && templateCode!=null){
+				try {
+					IClientProfile profile = DefaultProfile.getProfile(REGIONID, appkey, appSecret);
+					DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms",  HOST);
+					IAcsClient client = new DefaultAcsClient(profile);
+					    SingleSendSmsRequest request = new SingleSendSmsRequest();
+					        request.setSignName(signName);//控制台创建的签名名称
+					        request.setTemplateCode(templateCode);//控制台创建的模板CODE
+					        JSONObject node = new JSONObject();
+					        node.put("ownerName", ownerName);
+					        node.put("storeName", storeName);
+					        node.put("date", date);
+					        node.put("giveMoney", giveMoney);
+					        node.put("residueMoney", residueMoney);
+					        node.put("allMoney", allMoney);
+					        node.put("consumptiondetails", consumptiondetails);
+					        node.put("consumptionMoney", consumptionMoney);
+					        node.put("apliaydetails", apliaydetails);
+					        node.put("cardnum",cardnum);
+					        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+					        request.setRecNum(sendPhone);//接收号码
+					        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+					 } catch (ServerException e) {
+					        e.printStackTrace();
+					    }
+					    catch (ClientException e) {
+					        e.printStackTrace();
+					    }
+			}
 		
-		//短信模板code
-		String templateCode = queryTemplateCode.getTemplateCode();
 		
-	
-		try {
-		IClientProfile profile = DefaultProfile.getProfile(REGIONID, appkey, appSecret);
-		DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms",  HOST);
-		IAcsClient client = new DefaultAcsClient(profile);
-		    SingleSendSmsRequest request = new SingleSendSmsRequest();
-		        request.setSignName(signName);//控制台创建的签名名称
-		        request.setTemplateCode(templateCode);//控制台创建的模板CODE
-		        JSONObject node = new JSONObject();
-		        node.put("ownerName", ownerName);
-		        node.put("storeName", storeName);
-		        node.put("date", date);
-		        node.put("giveMoney", giveMoney);
-		        node.put("residueMoney", residueMoney);
-		        node.put("allMoney", allMoney);
-		        node.put("consumptiondetails", consumptiondetails);
-		        node.put("consumptionMoney", consumptionMoney);
-		        node.put("apliaydetails", apliaydetails);
-		        node.put("cardnum",cardnum);
-		        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-		        request.setRecNum(sendPhone);//接收号码
-		        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
-		 } catch (ServerException e) {
-		        e.printStackTrace();
-		    }
-		    catch (ClientException e) {
-		        e.printStackTrace();
-		    }
-	
+	}
 }
+		
 
 	
 }
