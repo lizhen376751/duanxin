@@ -1,5 +1,6 @@
 package com.dudu.soa.messagecenter.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dudu.soa.messagecenter.module.AccessKey;
@@ -15,7 +16,7 @@ public interface SendSmsDao {
 	/**
      * @Title:       查看本店铺所有的短信签名
      */
-	public  List<AccessKey> queryListAccessKey(String shopcode);
+	public  ArrayList queryListAccessKey(String shopcode);
 	
 	/**
      * @Title:       短信签名的新增
@@ -44,7 +45,7 @@ public interface SendSmsDao {
 	/*
 	 * 短信模板的查看(查看本店铺所有的短信模板)
 	 */
-	public List<TemplateCode> queryListTemplate(String shopcode);
+	public ArrayList queryListTemplate(String shopcode);
 	
 	
 	/**

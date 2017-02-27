@@ -140,14 +140,14 @@ public class SendSmsService implements ApiSendSms{
 }
 
 	 @Override
-	 @Transactional
-	 public List<AccessKey> queryListAccessKey(String shopcode){
+	 
+	 public ArrayList queryListAccessKey(String shopcode){
 		 	logger.info("=========进入查询====================");
 			return sendSmsDao.queryListAccessKey(shopcode);
 	 };
 	 
 	@Override
-	@Transactional
+	
 	public AccessKey queryAccessKey(String shopcode) {
 		// TODO Auto-generated method stub
 		return sendSmsDao.queryAccessKey(shopcode);
@@ -185,14 +185,14 @@ public class SendSmsService implements ApiSendSms{
 	 * 短信模板的查看(查看本店铺所有的短信模板)
 	 */
 	@Override
-	@Transactional
-	public List<TemplateCode> queryListTemplate(String shopcode){
+	
+	public ArrayList queryListTemplate(String shopcode){
 		// TODO Auto-generated method stub
 		return sendSmsDao.queryListTemplate(shopcode);
 	};
 	
 	@Override
-	@Transactional
+	
 	public TemplateCode queryTemplateCode(String shopcode, String businessType) {
 		// TODO Auto-generated method stub
 		return sendSmsDao.queryTemplateCode(shopcode, businessType);
