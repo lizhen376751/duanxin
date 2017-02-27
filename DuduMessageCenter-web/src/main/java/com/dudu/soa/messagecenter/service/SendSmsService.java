@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +37,7 @@ public class SendSmsService implements ApiSendSms{
 	 private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
 	 private final static String REGIONID = "";
 	
-	 
+	 private static Logger logger = LoggerFactory.getLogger(SendSmsService.class); 
 
 	 @Override
 	 @Transactional
@@ -140,7 +142,7 @@ public class SendSmsService implements ApiSendSms{
 	 @Override
 	 @Transactional
 	 public List<AccessKey> queryListAccessKey(String shopcode){
-		
+		 	logger.info("=========进入查询====================");
 			return sendSmsDao.queryListAccessKey(shopcode);
 	 };
 	 
