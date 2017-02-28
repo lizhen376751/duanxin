@@ -22,7 +22,7 @@ public interface ApiSendSms {
 	/**
      * @Title:       查看本店铺所有的短信签名
      */
-	public ArrayList queryListAccessKey(String shopcode);
+	public ArrayList<AccessKey> queryListAccessKey(String shopcode);
 	
 	/**
      * @Title:       短信签名的查看

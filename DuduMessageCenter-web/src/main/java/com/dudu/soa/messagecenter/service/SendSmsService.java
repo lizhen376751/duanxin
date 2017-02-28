@@ -141,7 +141,7 @@ public class SendSmsService implements ApiSendSms{
 
 	 @Override
 	 
-	 public ArrayList queryListAccessKey(String shopcode){
+	 public ArrayList<AccessKey> queryListAccessKey(String shopcode){
 		 	logger.info("=========进入查询====================");
 			return sendSmsDao.queryListAccessKey(shopcode);
 	 };
