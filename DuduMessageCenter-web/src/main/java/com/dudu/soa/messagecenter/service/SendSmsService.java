@@ -22,6 +22,8 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
 import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
+import com.dudu.soa.framework.pagehelp.DuduPageHelpUtil;
+import com.dudu.soa.framework.pagehelp.Page;
 import com.dudu.soa.messagecenter.api.ApiSendSms;
 import com.dudu.soa.messagecenter.mapper.SendSmsDao;
 import com.dudu.soa.messagecenter.module.AccessKey;
@@ -186,7 +188,7 @@ public class SendSmsService implements ApiSendSms{
 	 */
 	@Override
 	
-	public ArrayList queryListTemplate(String shopcode){
+	public ArrayList<TemplateCode> queryListTemplate(String shopcode){
 		// TODO Auto-generated method stub
 		return sendSmsDao.queryListTemplate(shopcode);
 	};

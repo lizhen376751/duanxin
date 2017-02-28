@@ -50,7 +50,7 @@ public interface ApiSendSms {
 	/*
 	 * 短信模板的查看(查看本店铺所有的短信模板)
 	 */
-	public ArrayList queryListTemplate(String shopcode);
+	public ArrayList<TemplateCode> queryListTemplate(String shopcode);
 	
 	/**
      * @Title:       短信模板的查看
