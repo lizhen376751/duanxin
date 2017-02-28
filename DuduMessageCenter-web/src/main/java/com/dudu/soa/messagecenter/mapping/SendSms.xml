@@ -99,6 +99,16 @@ where
 and 
 	b.businessType = #{1}
 </select>
+<!-- 根据id查看短信模板 -->
+<select id="getByidTemplate" parameterType="Integer" resultMap="templateCode">
+select 
+	b.id,b.businessType,b.shopCode,b.templateCode
+ FROM 
+ 	SMS_TemplateCode b 
+where 
+	b.id =  #{id}
+
+</select>
 
 <!-- 短信模板的新增 -->
 <insert id="addTemplateCode" parameterType="com.dudu.soa.messagecenter.module.TemplateCode" useGeneratedKeys="true" keyProperty="id" flushCache="true">

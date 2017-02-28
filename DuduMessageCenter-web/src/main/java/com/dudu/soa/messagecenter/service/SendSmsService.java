@@ -192,7 +192,12 @@ public class SendSmsService implements ApiSendSms{
 		// TODO Auto-generated method stub
 		return sendSmsDao.queryListTemplate(shopcode);
 	};
-	
+	//根据id查看短信模板
+	@Override
+	public TemplateCode getByidTemplate(Integer id) {
+		// TODO Auto-generated method stub
+		return sendSmsDao.getByidTemplate(id);
+	}
 	@Override
 	
 	public TemplateCode queryTemplateCode(String shopcode, String businessType) {

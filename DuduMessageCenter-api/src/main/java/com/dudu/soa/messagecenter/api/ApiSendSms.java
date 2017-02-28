@@ -56,7 +56,11 @@ public interface ApiSendSms {
      * @Title:       短信模板的查看
      */
 	public TemplateCode queryTemplateCode(String shopcode, String businessType);
-	
+	/**
+     * @Title:       根据id查看短信模板
+     */
+	public TemplateCode getByidTemplate(Integer id);
+		
 	/**
      * @Title:       短信模板的新增
      */

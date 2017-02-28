@@ -41,7 +41,10 @@ public interface SendSmsDao {
 	 * shopcode和businessType对应一个短信模板
 	 */
 	public TemplateCode queryTemplateCode(String shopcode,String businessType);
-	
+	/*
+	 * 根据id短信模板的查看(查看本店铺所有的短信模板)
+	 */
+	public TemplateCode getByidTemplate(Integer id);
 	/*
 	 * 短信模板的查看(查看本店铺所有的短信模板)
 	 */
