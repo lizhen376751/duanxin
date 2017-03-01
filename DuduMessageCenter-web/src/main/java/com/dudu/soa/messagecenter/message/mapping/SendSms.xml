@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dudu.soa.messagecenter.message.mapper.MessageConfigDao">
+
+<resultMap type="com.dudu.soa.messagecenter.message.module.AccessKey" id="accessKey">
+<id property="id" column="id"/>
+<result property="appkey" column="appkey"/>
+<result property="appSecret" column="appSecret"/>
+<result property="signName" column="signName"/>
+<result property="shopcode" column="shopcode"/>
+<result property="keyUse" column="keyUse"/>
+</resultMap>
+<resultMap type="com.dudu.soa.messagecenter.message.module.TemplateCode" id="templateCode">
+<id property="id" column="id"/>
+<result property="shopCode" column="shopcode"/>
+<result property="templateCode" column="templateCode"/>
+<result property="businessType" column="businessType"/>
+<result property="templateUse" column="templateUse"/>
+</resultMap>
+<!-- 查看所有的短信签名 -->
+<select id="queryListAccessKey" parameterType="String" resultMap="accessKey">
+select
+ 	id,appkey,appSecret,shopcode,signName,keyuse
+FROM 
+	SMS_AccessKey 
+where  
+	shopcode = #{shopCode}
+
+</select>
+
+<select id="getAccessKey" parameterType="String" resultMap="accessKey">
+select top 1
+ 	a.id,a.appkey,a.appSecret,a.shopcode,a.signName,a.keyuse
+FROM 
+	SMS_AccessKey a 
+where  
+	a.shopcode = #{shopCode}
+
+</select>
+
+<!-- 短信的参数的新增 -->
+<insert id="addAccessKey" parameterType="com.dudu.soa.messagecenter.message.module.AccessKey" useGeneratedKeys="true" keyProperty="id" flushCache="true">
+        INSERT INTO SMS_AccessKey (
+	appkey,
+	appSecret,
+	signName,
+	shopcode,
+	keyuse
+)
+VALUES
+	(
+		#{ appkey }, #{ appSecret }, #{ signName }, #{ shopcode },#{ keyuse }
+	)
+</insert>
+
+<!-- 短信参数的删除 -->
+<delete id="deleteAccessKey" parameterType="Integer" >
+    delete from SMS_AccessKey 
+    where id =#{id} 
+</delete> 
+
+<!-- 短信参数的修改 -->
+<update id="updateAccessKey" parameterType="com.dudu.soa.messagecenter.message.module.AccessKey" flushCache="true">
+    update SMS_AccessKey
+        <trim prefix="set" suffixOverrides=",">
+        <if test="appkey !=null and appkey != ''">  
+            appkey = #{appkey}, 
+        </if>
+        <if test="appSecret !=null and appSecret != ''">  
+            appSecret = #{appSecret},
+        </if>
+         <if test="signName !=null and signName != ''">  
+            signName = #{signName}, 
+        </if>
+        <if test="shopcode !=null and shopcode != ''">  
+            shopcode = #{shopcode},
+        </if>
+         <if test="shopcode !=null and shopcode != ''">  
+            keyUse = #{keyUse}
+        </if>
+        </trim>
+    where 
+        id = #{id}
+        
+</update>
+
+<!--查看本店铺所有的短信模板  -->
+<select id="queryListTemplate" parameterType="String" resultMap="templateCode">
+select 
+	id,businessType,shopCode,templateCode,templateUse
+ FROM 
+ 	SMS_TemplateCode  
+where 
+	shopCode =  #{shopCode}
+</select>
+
+<select id="getTemplateCode" parameterType="String" resultMap="templateCode">
+select 
+	top 1 b.id,b.businessType,b.shopCode,b.templateCode,b.templateUse
+ FROM 
+ 	SMS_TemplateCode b 
+where 
+	b.shopCode =  #{0}
+and 
+	b.businessType = #{1}
+</select>
+<!-- 根据id查看短信模板 -->
+<select id="getByidTemplate" parameterType="Integer" resultMap="templateCode">
+select 
+	b.id,b.businessType,b.shopCode,b.templateCode,templateUse
+ FROM 
+ 	SMS_TemplateCode b 
+where 
+	b.id =  #{id}
+
+</select>
+
+<!-- 短信模板的新增 -->
+<insert id="addTemplateCode" parameterType="com.dudu.soa.messagecenter.message.module.TemplateCode" useGeneratedKeys="true" keyProperty="id" flushCache="true">
+        INSERT INTO SMS_TemplateCode (
+	shopCode,
+	templateCode,
+	businessType,
+	templateUse
+)
+VALUES
+	(
+		#{shopCode}, #{templateCode}, #{businessType},#{templateUse}
+	)
+</insert>
+
+<!-- 短信模板的删除 -->
+<delete id="deleteTemplateCode" parameterType="Integer" >
+    delete from SMS_TemplateCode 
+    where id =#{id} 
+</delete> 
+
+<!-- 短信模板的修改 -->
+<update id="updateTemplate" parameterType="com.dudu.soa.messagecenter.message.module.TemplateCode" flushCache="true">
+    update SMS_TemplateCode
+        <trim prefix="set" suffixOverrides=",">
+        <if test="shopCode !=null and shopCode != ''">  
+            shopCode = #{shopCode}, 
+        </if>
+        <if test="templateCode !=null and templateCode != ''">  
+            templateCode = #{templateCode},
+        </if>
+         <if test="businessType !=null and businessType != ''">  
+            businessType = #{businessType},
+        </if>
+        <if test="templateUse !=null and templateUse != ''">  
+            templateUse = #{templateUse}
+        </if>
+        </trim>
+    where 
+        id = #{id}
+        
+</update>
+
+</mapper>
