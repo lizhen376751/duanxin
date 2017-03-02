@@ -6,5 +6,5 @@
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init = "true">
 
-		<dubbo:service interface="com.dudu.soa.messagecenter.api.ApiSendSms"  ref = "sendSmsService" version = "0.0.1" owner = "lizhen"/>
+		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms"  ref = "sendSmsService" version = "0.0.1" owner = "lizhen"/>
 </beans>
