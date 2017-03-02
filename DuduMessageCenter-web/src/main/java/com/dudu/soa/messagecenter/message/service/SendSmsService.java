@@ -73,7 +73,9 @@ public class SendSmsService implements ApiSendSms{
 		if(accessKey!=null && !"".equals(accessKey)){
 			 appkey = accessKey.getAppkey();
 			 appSecret = accessKey.getAppSecret();
+			 //获取短信签名
 			 signName = accessKey.getSignName();
+			 //获取是否启用
 			 keyuse = accessKey.getkeyuse();
 		}
 		
@@ -84,6 +86,7 @@ public class SendSmsService implements ApiSendSms{
 		if(templateCodes != null && !"".equals(templateCodes)){
 			//短信模板code
 			 templateCode = templateCodes.getTemplateCode();
+			 //获取是否启用
 			 templateUse = templateCodes.getTemplateUse();
 		}
 		

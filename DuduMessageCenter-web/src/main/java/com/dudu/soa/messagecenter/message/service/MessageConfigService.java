@@ -13,6 +13,7 @@ import com.dudu.soa.messagecenter.message.mapper.MessageConfigDao;
 import com.dudu.soa.messagecenter.message.module.AccessKey;
 import com.dudu.soa.messagecenter.message.module.TemplateCode;
 @Service
+
 public class MessageConfigService implements ApiMessageConfig{
 	 private static Logger logger = LoggerFactory.getLogger(MessageConfigService.class);
 	 @Autowired
