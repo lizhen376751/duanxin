@@ -47,7 +47,15 @@ public class SendSmsService implements ApiSendSms{
 	 private final static String REGIONID = "";
 	
 	 private static Logger logger = LoggerFactory.getLogger(SendSmsService.class); 
-
+	 /**
+	     * 
+	    * @Title:        创瑞短信发送方式
+	    * @Description:  TODO(商品绑定直属下级) 
+	    * @param:        @param shopProductAddOrUpd
+	    * @param:        @return    
+	    * 
+	     */
+	
 	@Override
 	public void sendSMS(String shopcode, String businessType,
 			List<String> recnum,ParameterEntry parameterEntry) {
@@ -115,7 +123,6 @@ public class SendSmsService implements ApiSendSms{
 			        node.put("carnum", carnum);
 			        node.put("date", date);
 			        node.put("storeName", storeName);
-			        
 			        node.put("parameter1", parameter1);
 			        node.put("parameter2", parameter2);
 			        node.put("parameter3",parameter3);
@@ -130,9 +137,10 @@ public class SendSmsService implements ApiSendSms{
 			        request.setRecNum(sendPhone);//接收号码
 			        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);					 
 			}else{
-				if( smsUser != null && smsUser.length() > 0 &&
-						recnum != null && recnum.size() > 0 &&
-							sms != null && sms.length() > 0 )
+				if( null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty() &&
+						null != recnum && recnum.size() > 0 && !recnum.isEmpty() &&
+						null != smsPwd && smsPwd.length() > 0 && ! smsPwd.isEmpty() &&
+								null != sms && sms.length() > 0 && !sms.isEmpty())
 				{
 					//原来的短信发送模式
 					StringBuilder sb = new StringBuilder(AGOHOST);
@@ -191,104 +199,3 @@ private String convertStreamToString(InputStream is) {
 }
 
 
-
-
-
-//@Override
-//public void sendSMS(ParameterEntry parameterEntry)  {
-//
-//	//获取参数用于赋值给短信中的内容参数
-//	//车主名字
-//	String ownerName = parameterEntry.getOwnerName();
-//	
-//	//项目卡号
-//	String cardnum = parameterEntry.getCardnum();
-//	
-//	//日期(如:消费日期,生日日期...)
-//	String date = parameterEntry.getDate();
-//	
-//	//赠送金额
-//	String giveMoney = parameterEntry.getGiveMoney();
-//	
-//	//剩余金额
-//	String residueMoney = parameterEntry.getResidueMoney();
-//	
-//	//总金额
-//	String allMoney = parameterEntry.getAllMoney();
-//	
-//	//店铺名字
-//	String storeName = parameterEntry.getStoreName();
-//	
-//	//消费详情(购买物品..)
-//	String consumptiondetails = parameterEntry.getConsumptiondetails();
-//	
-//	//支付详情(支付方式)
-//	String apliaydetails = parameterEntry.getApliaydetails();
-//	
-//	//获取businessType业务类型用于查询短信模板的code
-//	String businessType = parameterEntry.getBusinessType();
-//	
-//	//获取shopcode用于查询店铺的短信签名
-//	String shopcode = parameterEntry.getShopcode();
-//	
-//	//获取消费金额
-//	String consumptionMoney = parameterEntry.getConsumptionMoney();
-//	
-//	//发送的手机号码
-//	List<String> recnum = parameterEntry.getRecnum();
-//	String sendPhone = "";
-//	for(int i=0;i<recnum.size();i++){
-//		sendPhone+=recnum.get(i);
-//		sendPhone+=",";
-//			
-//	}
-//	
-//	//获取AccessKey实体
-//	AccessKey queryAccessKey = sendSmsDao.queryAccessKey(shopcode);
-//	
-//	String appkey = queryAccessKey.getAppkey();
-//	
-//	String appSecret = queryAccessKey.getAppSecret();
-//	
-//	//短信签名
-//	String signName = queryAccessKey.getSignName();
-//	
-//	//获取短信模板TemplateCode实体
-//	TemplateCode queryTemplateCode = sendSmsDao.queryTemplateCode(shopcode, businessType);
-//	if(queryTemplateCode != null){
-//		//短信模板code
-//		String templateCode = queryTemplateCode.getTemplateCode();
-//		
-//		if(!templateCode.isEmpty() && !"".equals(templateCode) && templateCode!=null){
-//			try {
-//				IClientProfile profile = DefaultProfile.getProfile(REGIONID, appkey, appSecret);
-//				DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms",  HOST);
-//				IAcsClient client = new DefaultAcsClient(profile);
-//				    SingleSendSmsRequest request = new SingleSendSmsRequest();
-//				        request.setSignName(signName);//控制台创建的签名名称
-//				        request.setTemplateCode(templateCode);//控制台创建的模板CODE
-//				        JSONObject node = new JSONObject();
-//				        node.put("ownerName", ownerName);
-//				        node.put("storeName", storeName);
-//				        node.put("date", date);
-//				        node.put("giveMoney", giveMoney);
-//				        node.put("residueMoney", residueMoney);
-//				        node.put("allMoney", allMoney);
-//				        node.put("consumptiondetails", consumptiondetails);
-//				        node.put("consumptionMoney", consumptionMoney);
-//				        node.put("apliaydetails", apliaydetails);
-//				        node.put("cardnum",cardnum);
-//				        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-//				        request.setRecNum(sendPhone);//接收号码
-//				        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
-//				 } catch (ServerException e) {
-//				        e.printStackTrace();
-//				    }
-//				    catch (ClientException e) {
-//				        e.printStackTrace();
-//				    }
-//		}
-//	
-//	
-//}
-//}
