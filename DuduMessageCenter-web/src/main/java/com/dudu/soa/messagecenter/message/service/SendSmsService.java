@@ -59,6 +59,7 @@ public class SendSmsService implements ApiSendSms{
 	@Override
 	public void sendSMS(String shopcode, String businessType,
 			List<String> recnum,ParameterEntry parameterEntry) {
+		String feedback = "";
 		String carnum = parameterEntry.getCarnum();
 		String storeName = parameterEntry.getStoreName();
 		String date = parameterEntry.getDate();
@@ -135,7 +136,8 @@ public class SendSmsService implements ApiSendSms{
 			        request.setTemplateCode(templateCode);//控制台创建的模板CODE
 			        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
 			        request.setRecNum(sendPhone);//接收号码
-			        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);					 
+			        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+//			        return "短信发送成功!";
 			}else{
 				if( null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty() &&
 						null != recnum && recnum.size() > 0 && !recnum.isEmpty() &&
@@ -156,13 +158,24 @@ public class SendSmsService implements ApiSendSms{
 					connection.setRequestMethod("POST");
 					InputStream is = url.openStream();
 					String returnStr = convertStreamToString(is);//返回值
+//					return "短信发送成功!";
 				}
 			}	
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+			
+			if(e.getMessage().toString().contains("The specified sign name is wrongly formed")){
+				System.out.println("-=========即使");
+			}
+			if(e.getMessage().toString().contains("The specified paramString and template is wrongly formed")){
+				System.out.println("-=========即使哦哦哦破");
+			}
+			
+//			return "短信发送失败!";
         }
+//		return "短信未发送!";
 	}
 		
 	
