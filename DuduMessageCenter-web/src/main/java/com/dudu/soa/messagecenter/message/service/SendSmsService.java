@@ -207,7 +207,8 @@ private String convertStreamToString(InputStream is) {
     return sb1.toString();    
 }
 	
-//测试方法
+//短信发送返回具体的状态
+@Override
 public String sendSMS2(String shopcode, String businessType,
 	List<String> recnum,ParameterEntry parameterEntry) {
 	String feedback = "";
