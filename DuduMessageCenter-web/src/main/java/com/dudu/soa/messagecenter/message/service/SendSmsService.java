@@ -136,6 +136,7 @@ public class SendSmsService implements ApiSendSms{
 			        request.setTemplateCode(templateCode);//控制台创建的模板CODE
 			        request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
 			        request.setRecNum(sendPhone);//接收号码
+			        logger.info("阿里云短信发送模式");
 			        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
 //			        return "短信发送成功!";
 			}else{
@@ -157,6 +158,7 @@ public class SendSmsService implements ApiSendSms{
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("POST");
 					InputStream is = url.openStream();
+					 logger.info("创瑞短信发送模式");
 					String returnStr = convertStreamToString(is);//返回值
 //					return "短信发送成功!";
 				}
