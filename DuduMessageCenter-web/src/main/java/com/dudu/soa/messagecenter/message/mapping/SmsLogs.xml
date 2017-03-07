@@ -122,19 +122,19 @@ VALUES
         <if test="carnum !=null and carnum != ''">  
             carnum = #{carnum},
         </if>
-         <if test="DATE !=null and DATE != ''">  
-            DATE = #{DATE}, 
+         <if test="date !=null and date != ''">  
+            date = #{date}, 
         </if>
         <if test="state !=null and state != ''">  
             state = #{state},
         </if>
          <if test="cause !=null and cause != ''">  
-            cause = #{cause}
+            cause = #{cause},
         </if>
         <if test="shopcode !=null and shopcode != ''">  
             shopcode = #{shopcode},
         </if>
-         <if test="carnum !=null and carnum != ''">  
+         <if test="smsname !=null and smsname != ''">  
             smsname = #{smsname}
         </if>
         </trim>

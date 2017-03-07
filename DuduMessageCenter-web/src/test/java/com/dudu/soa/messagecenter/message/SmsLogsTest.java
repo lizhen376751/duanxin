@@ -58,12 +58,12 @@ public class SmsLogsTest  extends TestBase{
 	public void queryByParams(){
 		try {
 			SmsLogs smsLogs =  new SmsLogs();
-//			smsLogs.setCarnum("7788899");
-//			smsLogs.setCause("成功");
-//			smsLogs.setDate("2015.3.6");
-//			smsLogs.setPhonenum("18560042032");
-//			smsLogs.setShopcode("0533001");
-//			smsLogs.setSmsname("生日提醒");
+			smsLogs.setCarnum("7788899");
+			smsLogs.setCause("成功");
+			smsLogs.setDate("2015.3.6");
+			smsLogs.setPhonenum("18560042032");
+			smsLogs.setShopcode("0533001");
+			smsLogs.setSmsname("生日提醒");
 			smsLogs.setState("成功");
 		 ArrayList<SmsLogs> queryAllList = smsLogsService.queryByParams(smsLogs);
 			logger.info("mohuchaxun===="+JSONObject.toJSONString(queryAllList));
@@ -73,4 +73,34 @@ public class SmsLogsTest  extends TestBase{
 		
 	}
 	
+	@Test
+	public void updateAccessKey(){
+		try {
+			SmsLogs smsLogs =  new SmsLogs();
+			smsLogs.setCarnum("7788899");
+			smsLogs.setCause("成功");
+			smsLogs.setDate("2015.3.6");
+			smsLogs.setPhonenum("18560042032");
+			smsLogs.setShopcode("0533001");
+			smsLogs.setSmsname("生日提醒4");
+			smsLogs.setState("成功4");
+			smsLogs.setId(4);
+		  smsLogsService.updateAccessKey(smsLogs);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Test
+	public void deleteSmsLogs(){
+		try {
+			
+		  smsLogsService.deleteSmsLogs(4);;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
