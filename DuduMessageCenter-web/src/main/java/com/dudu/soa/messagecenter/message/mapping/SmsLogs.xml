@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dudu.soa.messagecenter.message.mapper.SmsLogsDao">
+
+<resultMap type="com.dudu.soa.messagecenter.message.module.SmsLogs" id="smsLogs">
+<id property="id" column="id"/>
+<result property="shopcode" column="shopcode"/>
+<result property="phonenum" column="phonenum"/>
+<result property="carnum" column="carnum"/>
+<result property="smsname" column="smsname"/>
+<result property="date" column="date"/>
+<result property="state" column="state"/>
+<result property="cause" column="cause"/>
+</resultMap>
+
+<!-- 查看短信记录详情 -->
+<select id="getSmsLogs" parameterType="Integer" resultMap="smsLogs">
+SELECT
+	id,
+	phonenum,
+	carnum,
+	smsname,
+	date,
+	state,
+	cause,
+	shopcode
+FROM
+	SMS_Logs
+WHERE
+	id = #{id}
+
+</select>
+<!-- 查看所有的短信记录 -->
+<select id="queryAllList" parameterType="String" resultMap="smsLogs">
+SELECT
+	id,
+	phonenum,
+	carnum,
+	smsname,
+	date,
+	state,
+	cause,
+	shopcode
+FROM
+	SMS_Logs
+WHERE
+	shopcode = #{shopCode}
+
+</select>
+
+<!-- 查看所有的短信记录 -->
+<select id="queryByParams" parameterType="com.dudu.soa.messagecenter.message.module.SmsLogs" resultMap="smsLogs">
+SELECT
+	id,
+	phonenum,
+	carnum,
+	smsname,
+	date,
+	state,
+	cause,
+	shopcode
+FROM
+	SMS_Logs
+WHERE 1=1 
+	 <if test="phonenum !=null and phonenum != ''">  
+            and phonenum like '%'+#{phonenum}+'%'
+        </if>
+        <if test="carnum !=null and carnum != ''">  
+            and carnum like '%'+#{carnum}+'%'
+        </if>
+         <if test="date !=null and date != ''">  
+           and date like '%'+#{date}+'%' 
+        </if>
+        <if test="state !=null and state != ''">  
+            and state like '%'+#{state}+'%'
+        </if>
+         <if test="cause !=null and cause != ''">  
+            and cause like '%'+#{cause}+'%'
+        </if>
+       
+         <if test="smsname !=null and smsname != ''">  
+            and smsname like '%'+#{smsname}+'%'
+        </if>
+         <if test="shopcode !=null and shopcode != ''">  
+            and shopcode = #{shopcode}
+        </if>
+	
+
+</select>
+
+<!-- 新增短信记录-->
+<insert id="addSmsLogs" parameterType="com.dudu.soa.messagecenter.message.module.SmsLogs"  flushCache="true">
+       INSERT INTO SMS_Logs (
+	phonenum,
+	carnum,
+	smsname,
+	date,
+	state,
+	cause,
+	shopcode
+)
+VALUES
+	(
+		#{ phonenum }, #{ carnum }, #{ smsname }, #{ date },#{ state },#{ cause },#{ shopcode }
+	)
+</insert>
+
+<!-- 删除短信记录 -->
+<delete id="deleteSmsLogs" parameterType="Integer" >
+    delete from  SMS_Logs
+    where id =#{id} 
+</delete> 
+
+<!-- 修改短信记录-->
+<update id="updateAccessKey"  parameterType="com.dudu.soa.messagecenter.message.module.SmsLogs" flushCache="true">
+    update SMS_Logs
+        <trim prefix="set" suffixOverrides=",">
+        <if test="phonenum !=null and phonenum != ''">  
+            phonenum = #{phonenum}, 
+        </if>
+        <if test="carnum !=null and carnum != ''">  
+            carnum = #{carnum},
+        </if>
+         <if test="DATE !=null and DATE != ''">  
+            DATE = #{DATE}, 
+        </if>
+        <if test="state !=null and state != ''">  
+            state = #{state},
+        </if>
+         <if test="cause !=null and cause != ''">  
+            cause = #{cause}
+        </if>
+        <if test="shopcode !=null and shopcode != ''">  
+            shopcode = #{shopcode},
+        </if>
+         <if test="carnum !=null and carnum != ''">  
+            smsname = #{smsname}
+        </if>
+        </trim>
+    where 
+        id = #{id}
+        
+</update>
+
+
+</mapper>
