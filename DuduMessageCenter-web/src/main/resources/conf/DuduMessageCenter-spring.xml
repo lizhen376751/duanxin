@@ -8,4 +8,5 @@
 
 		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig"  ref = "messageConfigService" version = "0.0.1" owner = "lizhen"/>
 		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms"  ref = "sendSmsService" version = "0.0.1" owner = "lizhen"/>
+		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs"  ref = "smsLogsService" version = "0.0.1" owner = "lizhen"/>
 </beans>
