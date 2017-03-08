@@ -6,12 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.dudu.soa.messagecenter.message.mapper.SmsLogsDao;
+import com.dudu.soa.messagecenter.message.module.SmsLogs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,8 @@ public class SendSmsService implements ApiSendSms{
 	
 	 @Autowired
 	 private MessageConfigDao messageConfigDao;
+	 @Autowired
+	 private SmsLogsDao smsLogsDao;
 	 private final static String AGOHOST="http://web.cr6868.com/asmx/smsservice.aspx?";
 	 private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
 	 private final static String REGIONID = "";
@@ -59,7 +64,6 @@ public class SendSmsService implements ApiSendSms{
 	@Override
 	public void sendSMS(String shopcode, String businessType,
 		List<String> recnum,ParameterEntry parameterEntry) {
-		String feedback = "";
 		String carnum = parameterEntry.getCarnum();
 		String storeName = parameterEntry.getStoreName();
 		String date = parameterEntry.getDate();
@@ -79,7 +83,7 @@ public class SendSmsService implements ApiSendSms{
 		String signName = "";
 		String keyuse = "";
 		AccessKey accessKey = messageConfigDao.getAccessKey(shopcode);
-		if(accessKey!=null && !"".equals(accessKey)){
+		if(accessKey != null ){
 			 appkey = accessKey.getAppkey();
 			 appSecret = accessKey.getAppSecret();
 			 //获取短信签名
@@ -116,7 +120,17 @@ public class SendSmsService implements ApiSendSms{
 //	        node.put("sms", sms);
 //	        node.put("smsPwd", smsPwd);
 //	        node.put("smsUser", smsUser);
-	       
+	       //创建短信记录的实体类
+		SmsLogs smsLogs = new SmsLogs();
+		smsLogs.setCarnum(carnum);
+		SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
+		String date1 = sdf.format(new Date());
+		smsLogs.setDate(date1);
+		smsLogs.setPhonenum(sendPhone);
+		smsLogs.setShopcode(shopcode);
+		smsLogs.setSmsname(businessType);
+		String state = "";
+		String feedback = "";
 		try 
 		{	//现在的短信模式
 			if("true".equals(keyuse) && "true".equals(templateUse)){
@@ -138,6 +152,7 @@ public class SendSmsService implements ApiSendSms{
 			        request.setRecNum(sendPhone);//接收号码
 			        logger.info("阿里云短信发送模式");
 			        SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+					state = "成功";
 //			        return "短信发送成功!";
 			}else{
 				if( null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty() &&
@@ -160,6 +175,7 @@ public class SendSmsService implements ApiSendSms{
 					InputStream is = url.openStream();
 					 logger.info("创瑞短信发送模式");
 					String returnStr = convertStreamToString(is);//返回值
+					state = "成功";
 //					return "短信发送成功!";
 				}
 			}	
@@ -167,17 +183,13 @@ public class SendSmsService implements ApiSendSms{
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-			
-			if(e.getMessage().toString().contains("The specified sign name is wrongly formed")){
-				System.out.println("-=========即使");
-			}
-			if(e.getMessage().toString().contains("The specified paramString and template is wrongly formed")){
-				System.out.println("-=========即使哦哦哦破");
-			}
-			
-//			return "短信发送失败!";
+			state = "失败";
+			feedback = feedback(e.getMessage().toString());
+
         }
-//		return "短信未发送!";
+		smsLogs.setState(state);
+		smsLogs.setCause(feedback);
+		smsLogsDao.addSmsLogs(smsLogs);
 	}
 		
 	
@@ -233,7 +245,7 @@ public String sendSMS2(String shopcode, String businessType,
 	String signName = "";
 	String keyuse = "";
 	AccessKey accessKey = messageConfigDao.getAccessKey(shopcode);
-	if(accessKey!=null && !"".equals(accessKey)){
+	if(null != accessKey){
 		 appkey = accessKey.getAppkey();
 		 appSecret = accessKey.getAppSecret();
 		 //获取短信签名
