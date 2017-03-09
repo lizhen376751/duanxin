@@ -129,8 +129,8 @@ public class SendSmsService implements ApiSendSms{
 		smsLogs.setPhonenum(sendPhone);
 		smsLogs.setShopcode(shopcode);
 		smsLogs.setSmsname(businessType);
-		String state = "";
-		String feedback = "";
+		String state = "未发送";
+		String feedback = "短信相关参数未设置!";
 		try 
 		{	//现在的短信模式
 			if("true".equals(keyuse) && "true".equals(templateUse)){
