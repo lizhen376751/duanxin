@@ -133,7 +133,7 @@ public class SendSmsService implements ApiSendSms{
 		smsLogs.setShopcode(shopcode);
 		smsLogs.setSmsname(businessType);
 		String state = "未发送";
-		String feedback = "短信相关参数未设置!";
+		String feedback = "";
 		if(accessKey == null){}else {
 			feedback = "阿里云账号配置错误!";
 		}
