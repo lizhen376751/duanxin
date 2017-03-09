@@ -75,7 +75,7 @@ public class SendSmsService implements ApiSendSms{
 		String sms = parameterEntry.getSms();
 		String smsPwd = parameterEntry.getSmsPwd();
 		String smsUser = parameterEntry.getSmsUser();
-		
+
 		
 		//获取AccessKey实体
 		String appkey = "";
@@ -90,6 +90,7 @@ public class SendSmsService implements ApiSendSms{
 			 signName = accessKey.getSignName();
 			 //获取是否启用
 			 keyuse = accessKey.getkeyuse();
+
 		}
 		
 		//获取短信模板TemplateCode实体
@@ -120,6 +121,8 @@ public class SendSmsService implements ApiSendSms{
 //	        node.put("sms", sms);
 //	        node.put("smsPwd", smsPwd);
 //	        node.put("smsUser", smsUser);
+
+
 	       //创建短信记录的实体类
 		SmsLogs smsLogs = new SmsLogs();
 		smsLogs.setCarnum(carnum);
@@ -131,6 +134,15 @@ public class SendSmsService implements ApiSendSms{
 		smsLogs.setSmsname(businessType);
 		String state = "未发送";
 		String feedback = "短信相关参数未设置!";
+		if(accessKey == null){}else {
+			feedback = "阿里云账号配置错误!";
+		}
+		if(templateCodes == null){
+			feedback = "短信模板配置错误!";
+		}
+		if(accessKey == null && templateCodes == null){
+			feedback = "阿里云账号,短信模板配置错误!";
+		}
 		try 
 		{	//现在的短信模式
 			if("true".equals(keyuse) && "true".equals(templateUse)){
