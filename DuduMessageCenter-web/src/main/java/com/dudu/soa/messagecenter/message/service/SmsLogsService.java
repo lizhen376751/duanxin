@@ -12,7 +12,7 @@ import com.dudu.soa.messagecenter.message.module.SmsLogs;
 
 @Service
 public class SmsLogsService implements ApiSmslogs{
-	 
+
 	@Autowired
 	private SmsLogsDao smsLogsDao;
 	@Override
@@ -22,33 +22,33 @@ public class SmsLogsService implements ApiSmslogs{
 
 	@Override
 	public ArrayList<SmsLogs> queryAllList(String shopcode) {
-		
+
 		return smsLogsDao.queryAllList(shopcode);
 	}
 
 	@Override
 	public ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs) {
-				return smsLogsDao.queryByParams(smsLogs);
+		return smsLogsDao.queryByParams(smsLogs);
 	}
 
 	@Override
 	@Transactional
 	public void addSmsLogs(SmsLogs smsLogs) {
-		
+
 		smsLogsDao.addSmsLogs(smsLogs);
 	}
 
 	@Override
 	@Transactional
 	public void deleteSmsLogs(Integer id) {
-		
+
 		smsLogsDao.deleteSmsLogs(id);
 	}
 
 	@Override
 	@Transactional
 	public void updateAccessKey(SmsLogs smsLogs) {
-		
+
 		smsLogsDao.updateAccessKey(smsLogs);
 	}
 
