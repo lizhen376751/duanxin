@@ -134,7 +134,7 @@ public class SendSmsService implements ApiSendSms{
 		smsLogs.setSmsname(businessType);
 		String state = "未发送";
 		String feedback = "";
-		if(accessKey == null){}else {
+		if(accessKey == null) {
 			feedback = "阿里云账号配置错误!";
 		}
 		if(templateCodes == null){
