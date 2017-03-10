@@ -46,7 +46,7 @@ FROM
 	SMS_Logs
 WHERE
 	shopcode = #{shopCode}
-
+ ORDER BY date
 </select>
 
 <!-- 查看所有的短信记录 -->
@@ -85,8 +85,8 @@ WHERE 1=1
          <if test="shopcode !=null and shopcode != ''">  
             and shopcode = #{shopcode}
         </if>
-	
 
+    ORDER BY date
 </select>
 
 <!-- 新增短信记录-->
