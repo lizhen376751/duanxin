@@ -1,16 +1,19 @@
 package com.dudu.soa.messagecenter.message;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.dudu.soa.messagecenter.TestBase;
+import com.dudu.soa.messagecenter.message.module.ParameterEntry;
+import com.dudu.soa.messagecenter.message.service.SendSmsService;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.dudu.soa.messagecenter.TestBase;
-import com.dudu.soa.messagecenter.message.module.ParameterEntry;
-import com.dudu.soa.messagecenter.message.service.SendSmsService;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ */
 public class SendSmsTest extends TestBase{
 	
 	private static Logger logger = LoggerFactory.getLogger(SendSmsTest.class); 

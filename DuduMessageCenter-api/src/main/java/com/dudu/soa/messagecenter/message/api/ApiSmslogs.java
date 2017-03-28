@@ -1,40 +1,53 @@
 package com.dudu.soa.messagecenter.message.api;
 
-import java.util.ArrayList;
-
 import com.dudu.soa.messagecenter.message.module.SmsLogs;
 
+import java.util.ArrayList;
+
+/**
+ * 短信记录
+ */
 public interface ApiSmslogs {
-	/*
-	*查看短信记录详情
-	 */
-	public SmsLogs getSmsLogs(Integer id);
-	
-	/**
-     * @Title:查看所有的短信记录
+
+    /**
+     * @param id id
+     * @return 短信记录
+     * @Title 查看短信记录详情
      */
-	public  ArrayList<SmsLogs> queryAllList(String shopcode);
-	
-	/**
-     * @Title:模糊查询
+    SmsLogs getSmsLogs(Integer id);
+
+    /**
+     * @param shopcode shopcode
+     * @return 短信记录列表
+     * @Title 查看所有的短信记录
      */
-	public  ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs);
-	
-	
-	/**
+    ArrayList<SmsLogs> queryAllList(String shopcode);
+
+    /**
+     * @param smsLogs 实体参数
+     * @return 短信记录列表
+     * @Title 模糊查询
+     */
+    ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs);
+
+
+    /**
+     * @param smsLogs 实体参数
      * @Title: 新增短信记录
      */
-	
-	public void addSmsLogs(SmsLogs smsLogs);
-	
-	/**
-     * @Title:  短信记录的删除
+
+    void addSmsLogs(SmsLogs smsLogs);
+
+    /**
+     * @param id id
+     * @Title: 短信记录的删除
      */
-	
-	public void deleteSmsLogs(Integer id);
-	
-	/**
-     * @Title:  短信签名的修改
+
+    void deleteSmsLogs(Integer id);
+
+    /**
+     * @param smsLogs 短信记录实体
+     * @Title: 短信签名的修改
      */
-	public void updateAccessKey(SmsLogs smsLogs);
+    void updateAccessKey(SmsLogs smsLogs);
 }

@@ -1,134 +1,212 @@
 package com.dudu.soa.messagecenter.message.module;
 
 import java.io.Serializable;
-import java.util.List;
 
-/*
+/**
  * 调用短信接口所需要的参数封装为实体类
  */
-public class ParameterEntry implements Serializable{
-	
-	
-	//车牌号
-	public String carnum;
-	
-	//日期(如:消费日期,生日日期...)
-	public String date;
-	
-	//店铺名字
-	public String storeName;
-	
-	//短信内容(用于原短信发送)
-	public String sms;
-	
-	//用户名(用于原短信发送)
-	public String smsUser;
-	
-	//密码(用于原短信发送)
-	public String smsPwd;
-	
-	//参数1(用于短信内容赋值)
-	public String parameter1;
-	
-	//参数2(用于短信内容赋值)
-	public String parameter2;
-	
-	//参数3(用于短信内容赋值)
-	public String parameter3;
-	
-	//参数4(用于短信内容赋值)
-	public String parameter4;
+public class ParameterEntry implements Serializable {
 
-	public String getCarnum() {
-		return carnum;
-	}
+    /**
+     * 车牌号
+     */
+    private String carnum;
 
-	public void setCarnum(String carnum) {
-		this.carnum = carnum;
-	}
+    /**
+     * 日期(如:消费日期,生日日期...)
+     */
+    private String date;
 
-	public String getDate() {
-		return date;
-	}
+    /**
+     * 店铺名字
+     */
+    private String storeName;
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    /**
+     * 短信内容(用于原短信发送)
+     */
+    private String sms;
+    /**
+     * 用户名(用于原短信发送)
+     */
+    private String smsUser;
 
-	public String getStoreName() {
-		return storeName;
-	}
+    /**
+     * 密码(用于原短信发送)
+     */
+    private String smsPwd;
 
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
+    /**
+     * 参数1(用于短信内容赋值)
+     */
+    private String parameter1;
 
-	public String getSms() {
-		return sms;
-	}
+    /**
+     * 参数2(用于短信内容赋值)
+     */
+    private String parameter2;
 
-	public void setSms(String sms) {
-		this.sms = sms;
-	}
+    /**
+     * 参数3(用于短信内容赋值)
+     */
+    private String parameter3;
 
-	public String getSmsUser() {
-		return smsUser;
-	}
+    /**
+     * 参数4(用于短信内容赋值)
+     */
+    private String parameter4;
 
-	public void setSmsUser(String smsUser) {
-		this.smsUser = smsUser;
-	}
+    /**
+     * @return carnum
+     */
+    public String getCarnum() {
+        return carnum;
+    }
 
-	public String getSmsPwd() {
-		return smsPwd;
-	}
+    /**
+     * @param carnum carnum
+     */
+    public void setCarnum(String carnum) {
+        this.carnum = carnum;
+    }
 
-	public void setSmsPwd(String smsPwd) {
-		this.smsPwd = smsPwd;
-	}
+    /**
+     * @return date
+     */
+    public String getDate() {
+        return date;
+    }
 
-	public String getParameter1() {
-		return parameter1;
-	}
+    /**
+     * @param date date
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public void setParameter1(String parameter1) {
-		this.parameter1 = parameter1;
-	}
+    /**
+     * @return storeName
+     */
+    public String getStoreName() {
+        return storeName;
+    }
 
-	public String getParameter2() {
-		return parameter2;
-	}
+    /**
+     * @param storeName storeName
+     */
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
 
-	public void setParameter2(String parameter2) {
-		this.parameter2 = parameter2;
-	}
+    /**
+     * @return sms
+     */
+    public String getSms() {
+        return sms;
+    }
 
-	public String getParameter3() {
-		return parameter3;
-	}
+    /**
+     * @param sms sms
+     */
+    public void setSms(String sms) {
+        this.sms = sms;
+    }
 
-	public void setParameter3(String parameter3) {
-		this.parameter3 = parameter3;
-	}
+    /**
+     * @return smsUser
+     */
+    public String getSmsUser() {
+        return smsUser;
+    }
 
-	public String getParameter4() {
-		return parameter4;
-	}
+    /**
+     * @param smsUser smsUser
+     */
+    public void setSmsUser(String smsUser) {
+        this.smsUser = smsUser;
+    }
 
-	public void setParameter4(String parameter4) {
-		this.parameter4 = parameter4;
-	}
+    /**
+     * @return smsPwd
+     */
+    public String getSmsPwd() {
+        return smsPwd;
+    }
 
-	@Override
-	public String toString() {
-		return "ParameterEntry [carnum=" + carnum + ", date=" + date
-				+ ", storeName=" + storeName + ", sms=" + sms + ", smsUser="
-				+ smsUser + ", smsPwd=" + smsPwd + ", parameter1=" + parameter1
-				+ ", parameter2=" + parameter2 + ", parameter3=" + parameter3
-				+ ", parameter4=" + parameter4 + "]";
-	}
-	
-	
-	
-	
+    /**
+     * @param smsPwd smsPwd
+     */
+    public void setSmsPwd(String smsPwd) {
+        this.smsPwd = smsPwd;
+    }
+
+    /**
+     * @return parameter1
+     */
+    public String getParameter1() {
+        return parameter1;
+    }
+
+    /**
+     * @param parameter1 parameter1
+     */
+    public void setParameter1(String parameter1) {
+        this.parameter1 = parameter1;
+    }
+
+    /**
+     * @return parameter2
+     */
+    public String getParameter2() {
+        return parameter2;
+    }
+
+    /**
+     * @param parameter2 parameter2
+     */
+    public void setParameter2(String parameter2) {
+        this.parameter2 = parameter2;
+    }
+
+    /**
+     * @return parameter3
+     */
+    public String getParameter3() {
+        return parameter3;
+    }
+
+    /**
+     * @param parameter3 parameter3
+     */
+    public void setParameter3(String parameter3) {
+        this.parameter3 = parameter3;
+    }
+
+    /**
+     * @return parameter4
+     */
+    public String getParameter4() {
+        return parameter4;
+    }
+
+    /**
+     * @param parameter4 parameter4
+     */
+    public void setParameter4(String parameter4) {
+        this.parameter4 = parameter4;
+    }
+
+    /**
+     * @return 字符串
+     */
+    @Override
+    public String toString() {
+        return "ParameterEntry [carnum=" + carnum + ", date=" + date
+                + ", storeName=" + storeName + ", sms=" + sms + ", smsUser="
+                + smsUser + ", smsPwd=" + smsPwd + ", parameter1=" + parameter1
+                + ", parameter2=" + parameter2 + ", parameter3=" + parameter3
+                + ", parameter4=" + parameter4 + "]";
+    }
+
+
 }
