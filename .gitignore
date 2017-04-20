@@ -1,9 +1,14 @@
 .project
 /.idea
 /target
-/*/target
+/**/target
 *.iml
 *.log
 /**/*logs*
 /.settings
 /**/.settings
+/**/disconf
+/**/bin
+**/.classpath
+**/.project
+

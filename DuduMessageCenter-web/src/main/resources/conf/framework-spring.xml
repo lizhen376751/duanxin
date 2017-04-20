@@ -7,27 +7,40 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd    
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd   
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd  
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
 
-    <!--
-       核心配置文件用于加载 classpath下所有properties文件
-       设置相关spring 基础设置
-       其余配置文件按格式加载设置
-       dubbo.xsd为dubbo的schema文件  勿删
-     -->
+    <!-- 使用disconf必须添加以下配置 -->
+    <bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
+          destroy-method="destroy">
+        <property name="scanPackage" value="com.baidu"/>
+    </bean>
 
-    <!-- 自动加载配置文件 -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="systemPropertiesMode" value="2"/>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    <bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond"
+          init-method="init" destroy-method="destroy">
+    </bean>
+
+    <!-- 使用托管方式的disconf配置(无代码侵入, 配置更改不会自动reload)-->
+    <bean id="configproperties_no_reloadable_disconf"
+          class="com.baidu.disconf.client.addons.properties.ReloadablePropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath*:META-INF/app.properties</value>
-                <value>file:*.properties</value>
+                <value>classpath:dubbo.properties</value>
+                <value>classpath:DuduMessageCenter.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="systemPropertiesMode" value="2"/>
+        <property name="propertiesArray">
+            <list>
+                <ref bean="configproperties_no_reloadable_disconf"/>
             </list>
         </property>
     </bean>
@@ -39,7 +52,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <dubbo:annotation package="com.dudu"/>
-    <dubbo:application name="${app.name}"/>
+    <dubbo:application name="DuduMessageCenter"/>
     <dubbo:protocol name="dubbo" port="${dubbo.application.port}" host="${dubbo.application.host}"/>
     <dubbo:registry address="${dubbo.registry.address}"/>
     <!--<dubbo:monitor protocol="registry"/>-->
@@ -49,7 +62,7 @@
 
     <bean id="DataSource_DuduMessageCenter" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
-        <property name="name" value="${app.name}"/>
+        <property name="name" value="DuduMessageCenter"/>
         <property name="url" value="${DuduMessageCenter.url}"/>
         <property name="username" value="${DuduMessageCenter.username}"/>
         <property name="password" value="${DuduMessageCenter.password}"/>
