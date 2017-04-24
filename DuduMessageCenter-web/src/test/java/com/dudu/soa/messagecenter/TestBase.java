@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 //@TransactionConfiguration(transactionManager = "transactionManager")
-@ContextConfiguration("classpath*:conf/*-spring.xml")
+@ContextConfiguration("classpath*:conf/framework-spring.xml")
 public abstract class TestBase {
     @Resource
     ApplicationContext ctx;

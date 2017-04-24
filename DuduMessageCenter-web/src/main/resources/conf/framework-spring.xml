@@ -53,12 +53,8 @@
 
     <dubbo:annotation package="com.dudu"/>
     <dubbo:application name="DuduMessageCenter"/>
-    <dubbo:protocol name="dubbo" port="${dubbo.application.port}" host="${dubbo.application.host}"/>
     <dubbo:registry address="${dubbo.registry.address}"/>
-    <!--<dubbo:monitor protocol="registry"/>-->
-
-    <!-- 开启AOP -->
-    <aop:aspectj-autoproxy/>
+    <dubbo:monitor protocol="registry"/>
 
     <bean id="DataSource_DuduMessageCenter" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
           destroy-method="close">
@@ -67,14 +63,11 @@
         <property name="username" value="${DuduMessageCenter.username}"/>
         <property name="password" value="${DuduMessageCenter.password}"/>
         <!-- initialSize: 初始化连接  -->
-        <property name="filters" value="stat,wall,log4j"/>
+        <property name="filters" value="wall"/>
     </bean>
 
     <!-- 开启事务注解驱动 -->
     <tx:annotation-driven/>
-
-    <!-- 配置druid监控spring jdbc -->
-    <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"/>
 
     <!-- 事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
