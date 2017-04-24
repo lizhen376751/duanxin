@@ -68,7 +68,7 @@ public class MessageConfigServiceTest extends TestBase{
 	
 	@Test
 	public void queryTemplateCode(){
-		TemplateCode queryTemplateCode = messageConfigService.getTemplateCode("shopcode", "businessType");
+		TemplateCode queryTemplateCode = messageConfigService.getTemplateCode("CS000", "验证码");
 		logger.debug("TemplateCode实体为:"+queryTemplateCode.toString());
 	};
 	@Test

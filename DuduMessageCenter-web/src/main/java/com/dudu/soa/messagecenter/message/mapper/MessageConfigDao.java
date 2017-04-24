@@ -43,7 +43,7 @@ public interface MessageConfigDao {
      * 根据shopcode和businessType在TemplateCode表中查询出templateCode
      * shopcode和businessType对应一个短信模板
      */
-     TemplateCode getTemplateCode(String shopcode, String businessType);
+     TemplateCode getTemplateCode(TemplateCode templateCode);
 
     /*
      * 根据id短信模板的查看(查看本店铺所有的短信模板)

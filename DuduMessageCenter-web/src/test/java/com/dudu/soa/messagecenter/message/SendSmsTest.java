@@ -23,20 +23,21 @@ public class SendSmsTest extends TestBase{
 	public void sendSMS() throws Exception{
 		try{
 			ParameterEntry  parameterEntry = new ParameterEntry();
+
 			List<String> list = new ArrayList();
 			list.add("18560042032");
-			parameterEntry.setCarnum("carnum");
-			parameterEntry.setDate("date");
-			parameterEntry.setParameter1("parameter1");
-			parameterEntry.setParameter2("parameter2");
-			parameterEntry.setParameter3("parameter3");
-			parameterEntry.setParameter4("parameter4");
-			parameterEntry.setSms("尊敬的12车主，您的车辆保险将于12到期。【天成车业】");
-			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
-			parameterEntry.setSmsUser("GL_tiancheng");
-			parameterEntry.setStoreName("storeName");
-			System.out.println("+++=======短信实体类"+parameterEntry);
-		    sendSmsService.sendSMS("0533001", "测试", list, parameterEntry);
+//			parameterEntry.setCarnum("carnum");
+//			parameterEntry.setDate("date");
+			parameterEntry.setParameter1("063233");
+//			parameterEntry.setParameter2("parameter2");
+//			parameterEntry.setParameter3("parameter3");
+//			parameterEntry.setParameter4("parameter4");
+//			parameterEntry.setSms("尊敬的12车主，您的车辆保险将于12到期。【天成车业】");
+//			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
+//			parameterEntry.setSmsUser("GL_tiancheng");
+//			parameterEntry.setStoreName("storeName");
+//			System.out.println("+++=======短信实体类"+parameterEntry);
+		    sendSmsService.sendSMS("CS000", "验证码", list, parameterEntry);
 	}catch(Exception e){
 		e.printStackTrace();
 	}
@@ -60,7 +61,7 @@ public class SendSmsTest extends TestBase{
 			parameterEntry.setSmsUser("GL_tiancheng");
 			parameterEntry.setStoreName("storeName");
 			System.out.println("+++=======短信实体类"+parameterEntry);
-		    String sendSMS2 = sendSmsService.sendSMS2("0533001", "测试", list, parameterEntry);
+		    String sendSMS2 = sendSmsService.sendSMS2("", "测试", list, parameterEntry);
 		    System.out.println(sendSMS2);
 		}catch(Exception e){
 		e.printStackTrace();
