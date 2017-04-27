@@ -29,36 +29,39 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ * 短信发送的service
  */
 @Service
 public class SendSmsService implements ApiSendSms {
     /**
-     *
-     */
-    private final static String AGOHOST = "http://web.cr6868.com/asmx/smsservice.aspx?";
-    /**
-     *
-     */
-    private final static String HOST = "sms.aliyuncs.com"; //API域名从控制台获取
-    /**
-     *
-     */
-    private final static String REGIONID = "";
-    /**
-     *
+     * 日志打印
      */
     private static Logger logger = LoggerFactory.getLogger(SendSmsService.class);
     /**
+     * 发送网址
+     */
+    private final String aGOHOST = "http://web.cr6868.com/asmx/smsservice.aspx?";
+    /**
+     * API域名从控制台获取
+     */
+    private final String hOST = "sms.aliyuncs.com";
+    /**
      *
+     */
+    private final String rEGIONID = "";
+    /**
+     * 引入短信配置dao层
      */
     @Autowired
     private MessageConfigDao messageConfigDao;
     /**
-     *
+     * 短信日志dao
      */
     @Autowired
     private SmsLogsDao smsLogsDao;
+    /**
+     * 短信配置的方法
+     */
     @Autowired
     private MessageConfigService messageConfigService;
 
@@ -85,7 +88,7 @@ public class SendSmsService implements ApiSendSms {
         String smsUser = parameterEntry.getSmsUser();
 
 
-        //获取AccessKey实体
+//获取AccessKey实体
         String appkey = "";
         String appSecret = "";
         String signName = "";
@@ -94,21 +97,21 @@ public class SendSmsService implements ApiSendSms {
         if (accessKey != null) {
             appkey = accessKey.getAppkey();
             appSecret = accessKey.getAppSecret();
-            //获取短信签名
+//获取短信签名
             signName = accessKey.getSignName();
-            //获取是否启用
+//获取是否启用
             keyuse = accessKey.getkeyuse();
 
         }
 
-        //获取短信模板TemplateCode实体
+//获取短信模板TemplateCode实体
         String templateCode = "";
         String templateUse = "";
         TemplateCode templateCodes = messageConfigService.getTemplateCode(shopcode, businessType);
         if (templateCodes != null && !"".equals(templateCodes)) {
-            //短信模板code
+//短信模板code
             templateCode = templateCodes.getTemplateCode();
-            //获取是否启用
+//获取是否启用
             templateUse = templateCodes.getTemplateUse();
         }
 
@@ -125,13 +128,13 @@ public class SendSmsService implements ApiSendSms {
         }
 
 
-//	        原来的短信模式不需要添加
-//	        node.put("sms", sms);
-//	        node.put("smsPwd", smsPwd);
-//	        node.put("smsUser", smsUser);
+//        原来的短信模式不需要添加
+//        node.put("sms", sms);
+//        node.put("smsPwd", smsPwd);
+//        node.put("smsUser", smsUser);
 
 
-        //创建短信记录的实体类
+//创建短信记录的实体类
         SmsLogs smsLogs = new SmsLogs();
         smsLogs.setCarnum(carnum);
         SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
@@ -151,7 +154,7 @@ public class SendSmsService implements ApiSendSms {
         if (accessKey == null && templateCodes == null) {
             feedback = "阿里云账号,短信模板配置错误!";
         }
-        try {    //现在的短信模式
+        try { //现在的短信模式
             if ("true".equals(keyuse) && "true".equals(templateUse)) {
                 JSONObject node = new JSONObject();
                 node.put("carnum", carnum);
@@ -161,25 +164,25 @@ public class SendSmsService implements ApiSendSms {
                 node.put("parameter2", parameter2);
                 node.put("parameter3", parameter3);
                 node.put("parameter4", parameter4);
-                IClientProfile profile = DefaultProfile.getProfile(REGIONID, appkey, appSecret);
-                DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms", HOST);
+                IClientProfile profile = DefaultProfile.getProfile(rEGIONID, appkey, appSecret);
+                DefaultProfile.addEndpoint(rEGIONID, rEGIONID, "Sms", hOST);
                 IAcsClient client = new DefaultAcsClient(profile);
                 SingleSendSmsRequest request = new SingleSendSmsRequest();
-                request.setSignName(signName);//控制台创建的签名名称
-                request.setTemplateCode(templateCode);//控制台创建的模板CODE
-                request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-                request.setRecNum(sendPhone);//接收号码
+                request.setSignName(signName); //控制台创建的签名名称
+                request.setTemplateCode(templateCode); //控制台创建的模板CODE
+                request.setParamString(node.toString()); //短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+                request.setRecNum(sendPhone); //接收号码
                 logger.info("阿里云短信发送模式");
                 SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
                 state = "成功";
-//			        return "短信发送成功!";
+//                return "短信发送成功!";
             } else {
-                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty() &&
-                        null != recnum && recnum.size() > 0 && !recnum.isEmpty() &&
-                        null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty() &&
-                        null != sms && sms.length() > 0 && !sms.isEmpty()) {
-                    //原来的短信发送模式
-                    StringBuilder sb = new StringBuilder(AGOHOST);
+                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty()
+                        && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
+                        && null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty()
+                        && null != sms && sms.length() > 0 && !sms.isEmpty()) {
+//原来的短信发送模式
+                    StringBuilder sb = new StringBuilder(aGOHOST);
                     sb.append("name=" + smsUser);
                     sb.append("&pwd=" + smsPwd);
                     sb.append("&mobile=" + sendPhone);
@@ -192,9 +195,9 @@ public class SendSmsService implements ApiSendSms {
                     connection.setRequestMethod("POST");
                     InputStream is = url.openStream();
                     logger.info("创瑞短信发送模式");
-                    String returnStr = convertStreamToString(is);//返回值
+                    String returnStr = convertStreamToString(is); //返回值
                     state = "成功";
-//					return "短信发送成功!";
+//                    return "短信发送成功!";
                 }
             }
         } catch (Exception e) {
@@ -210,10 +213,10 @@ public class SendSmsService implements ApiSendSms {
 
 
     /**
-     * 转换返回值类型为UTF-8格式.
+     * 字符串的转换
      *
-     * @param is
-     * @return
+     * @param is 流
+     * @return 字符串
      */
     private String convertStreamToString(InputStream is) {
         StringBuilder sb1 = new StringBuilder();
@@ -237,7 +240,13 @@ public class SendSmsService implements ApiSendSms {
         return sb1.toString();
     }
 
-    //短信发送返回具体的状态
+    /**
+     * @param shopcode       店铺代码
+     * @param businessType   业务类型
+     * @param recnum         手机号码List集合
+     * @param parameterEntry 参数实体
+     * @return
+     */
     @Override
     public String sendSMS2(String shopcode, String businessType,
                            List<String> recnum, ParameterEntry parameterEntry) {
@@ -255,7 +264,7 @@ public class SendSmsService implements ApiSendSms {
         String smsUser = parameterEntry.getSmsUser();
 
 
-        //获取AccessKey实体
+//获取AccessKey实体
         String appkey = "";
         String appSecret = "";
         String signName = "";
@@ -264,20 +273,20 @@ public class SendSmsService implements ApiSendSms {
         if (null != accessKey) {
             appkey = accessKey.getAppkey();
             appSecret = accessKey.getAppSecret();
-            //获取短信签名
+//获取短信签名
             signName = accessKey.getSignName();
-            //获取是否启用
+//获取是否启用
             keyuse = accessKey.getkeyuse();
         }
 
-        //获取短信模板TemplateCode实体
+//获取短信模板TemplateCode实体
         String templateCode = "";
         String templateUse = "";
         TemplateCode templateCodes = messageConfigService.getTemplateCode(shopcode, businessType);
         if (templateCodes != null && !"".equals(templateCodes)) {
-            //短信模板code
+//短信模板code
             templateCode = templateCodes.getTemplateCode();
-            //获取是否启用
+//获取是否启用
             templateUse = templateCodes.getTemplateUse();
         }
 
@@ -294,12 +303,12 @@ public class SendSmsService implements ApiSendSms {
         }
 
 
-//        原来的短信模式不需要添加
-//        node.put("sms", sms);
-//        node.put("smsPwd", smsPwd);
-//        node.put("smsUser", smsUser);
+//原来的短信模式不需要添加
+//node.put("sms", sms);
+//node.put("smsPwd", smsPwd);
+//node.put("smsUser", smsUser);
 
-        try {    //现在的短信模式
+        try { //现在的短信模式
             if ("true".equals(keyuse) && "true".equals(templateUse)) {
                 JSONObject node = new JSONObject();
                 node.put("carnum", carnum);
@@ -309,23 +318,23 @@ public class SendSmsService implements ApiSendSms {
                 node.put("parameter2", parameter2);
                 node.put("parameter3", parameter3);
                 node.put("parameter4", parameter4);
-                IClientProfile profile = DefaultProfile.getProfile(REGIONID, appkey, appSecret);
-                DefaultProfile.addEndpoint(REGIONID, REGIONID, "Sms", HOST);
+                IClientProfile profile = DefaultProfile.getProfile(rEGIONID, appkey, appSecret);
+                DefaultProfile.addEndpoint(rEGIONID, rEGIONID, "Sms", hOST);
                 IAcsClient client = new DefaultAcsClient(profile);
                 SingleSendSmsRequest request = new SingleSendSmsRequest();
-                request.setSignName(signName);//控制台创建的签名名称
-                request.setTemplateCode(templateCode);//控制台创建的模板CODE
-                request.setParamString(node.toString());//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-                request.setRecNum(sendPhone);//接收号码
+                request.setSignName(signName); //控制台创建的签名名称
+                request.setTemplateCode(templateCode); //控制台创建的模板CODE
+                request.setParamString(node.toString()); //短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+                request.setRecNum(sendPhone); //接收号码
                 SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
                 return "短信发送成功!";
             } else {
-                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty() &&
-                        null != recnum && recnum.size() > 0 && !recnum.isEmpty() &&
-                        null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty() &&
-                        null != sms && sms.length() > 0 && !sms.isEmpty()) {
-                    //原来的短信发送模式
-                    StringBuilder sb = new StringBuilder(AGOHOST);
+                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty()
+                        && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
+                        && null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty()
+                        && null != sms && sms.length() > 0 && !sms.isEmpty()) {
+//原来的短信发送模式
+                    StringBuilder sb = new StringBuilder(aGOHOST);
                     sb.append("name=" + smsUser);
                     sb.append("&pwd=" + smsPwd);
                     sb.append("&mobile=" + sendPhone);
@@ -337,7 +346,7 @@ public class SendSmsService implements ApiSendSms {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     InputStream is = url.openStream();
-                    String returnStr = convertStreamToString(is);//返回值
+                    String returnStr = convertStreamToString(is); //返回值
                     return "短信发送成功!";
                 }
             }
@@ -349,7 +358,13 @@ public class SendSmsService implements ApiSendSms {
         return "短信未发送!";
     }
 
-    //错误提示
+
+    /**
+     * 错误提示
+     *
+     * @param errorMess 错误代码
+     * @return 字符串
+     */
     private String feedback(String errorMess) {
         errorMess = errorMess.toString();
         String error1 = "The specified dayu status is wrongly formed";

@@ -4,40 +4,48 @@ import java.util.ArrayList;
 
 import com.dudu.soa.messagecenter.message.module.SmsLogs;
 
-//短信记录
+/**
+ * 短信记录
+ */
 public interface SmsLogsDao {
-	/*
-	*查看短信记录详情
+
+	/**
+	 * 短信日志
+	 * @param id 主键id
+	 * @return 短信日志
 	 */
-	public SmsLogs getSmsLogs(Integer id);
-	
+	 SmsLogs getSmsLogs(Integer id);
+
 	/**
-     * @Title:查看所有的短信记录
-     */
-	public  ArrayList<SmsLogs> queryAllList(String shopcode);
-	
+	 * 查看所有的短信记录
+	 * @param shopcode 店铺编码
+	 * @return 短信集合
+	 */
+	  ArrayList<SmsLogs> queryAllList(String shopcode);
+
 	/**
-     * @Title:模糊查询
-     */
-	public  ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs);
-	
+	 * 模糊查询
+	 * @param smsLogs 短信日志
+	 * @return
+	 */
+	  ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs);
+
 	/**
-     * @Title: 新增短信记录
-     */
-	
-	public void addSmsLogs(SmsLogs smsLogs);
-	
+	 * 新增短信记录
+	 * @param smsLogs 短信日志
+	 */
+	 void addSmsLogs(SmsLogs smsLogs);
+
 	/**
-     * @Title:  短信记录的删除
-     */
-	
-	public void deleteSmsLogs(Integer id);
-	
+	 * 短信记录的删除
+	 * @param id 逐渐id
+	 */
+	 void deleteSmsLogs(Integer id);
+
 	/**
-     * @Title:  短信签名的修改
-     */
-	public void updateAccessKey(SmsLogs smsLogs);
-	
-	
-	
+	 * 短信签名的修改
+	 * @param smsLogs 短信日志
+	 */
+	 void updateAccessKey(SmsLogs smsLogs);
+
 }

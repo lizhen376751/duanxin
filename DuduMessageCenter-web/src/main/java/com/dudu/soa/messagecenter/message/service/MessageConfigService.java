@@ -12,10 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
+/**
+ * 短信的配置
+ */
 @Service
-
 public class MessageConfigService implements ApiMessageConfig {
+    /**
+     * 日志打印
+     */
     private static Logger logger = LoggerFactory.getLogger(MessageConfigService.class);
+    /**
+     * 引入短息的dao层
+     */
     @Autowired
     private MessageConfigDao messageConfigDao;
 
@@ -25,7 +33,6 @@ public class MessageConfigService implements ApiMessageConfig {
         return messageConfigDao.queryListAccessKey(shopcode);
     }
 
-    ;
 
     @Override
     public AccessKey getAccessKey(String shopcode) {
