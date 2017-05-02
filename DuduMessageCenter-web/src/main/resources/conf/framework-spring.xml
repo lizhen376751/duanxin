@@ -30,6 +30,7 @@
             <list>
                 <value>classpath:dubbo.properties</value>
                 <value>classpath:DuduMessageCenter.properties</value>
+                <value>classpath:jiguang.properties</value>
             </list>
         </property>
     </bean>
@@ -84,5 +85,10 @@
         <property name="basePackage" value="com.dudu.soa.**.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <bean class="com.dudu.soa.messagecenter.jgmsg.JgPushConfig"
+          p:appKey="${jg.appKey}"
+          p:masterSecret="${jg.masterSecret}"
+          scope="singleton"/>
 
 </beans>

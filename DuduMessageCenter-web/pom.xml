@@ -19,6 +19,11 @@
             <type>pom</type>
         </dependency>
         <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <version>3.2.11</version>
+        </dependency>
+        <dependency>
             <groupId>com.dudu.soa</groupId>
             <artifactId>DuduFramework-core</artifactId>
             <version>${dudu.framework.version}</version>

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:dubbo = "http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
-       default-lazy-init = "true">
+       default-lazy-init="true">
 
-		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig"  ref = "messageConfigService" version = "0.0.1" owner = "lizhen"/>
-		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms"  ref = "sendSmsService" version = "0.0.1" owner = "lizhen"/>
-		<dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs"  ref = "smsLogsService" version = "0.0.1" owner = "lizhen"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.application.port}" host="${dubbo.application.host}"/>
+
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig" ref="messageConfigService"
+                   version="0.0.1" owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms" ref="sendSmsService" version="0.0.1"
+                   owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs" ref="smsLogsService" version="0.0.1"
+                   owner="lizhen"/>
+
+    <dubbo:service interface="com.dudu.soa.messagecenter.jgmsg.api.ApiJgPushIntf" ref="jgPushAdapter" owner="frank"/>
+
 </beans>
