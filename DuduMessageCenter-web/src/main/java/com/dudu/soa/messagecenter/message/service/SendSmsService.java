@@ -333,7 +333,7 @@ public class SendSmsService implements ApiSendSms {
                         && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
                         && null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty()
                         && null != sms && sms.length() > 0 && !sms.isEmpty()) {
-//原来的短信发送模式
+                    //原来的短信发送模式
                     StringBuilder sb = new StringBuilder(aGOHOST);
                     sb.append("name=" + smsUser);
                     sb.append("&pwd=" + smsPwd);

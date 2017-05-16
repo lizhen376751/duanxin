@@ -1,5 +1,6 @@
 package com.dudu.soa.messagecenter.message.service;
 
+import com.dudu.soa.framework.pagehelp.DuduPageHelpUtil;
 import com.dudu.soa.messagecenter.message.api.ApiMessageConfig;
 import com.dudu.soa.messagecenter.message.mapper.MessageConfigDao;
 import com.dudu.soa.messagecenter.message.module.AccessKey;
@@ -66,6 +67,7 @@ public class MessageConfigService implements ApiMessageConfig {
      */
     @Override
     public ArrayList<TemplateCode> queryListTemplate(String shopcode) {
+        DuduPageHelpUtil.query("id");
         return messageConfigDao.queryListTemplate(shopcode);
     }
 

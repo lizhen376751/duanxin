@@ -1,5 +1,6 @@
 package com.dudu.soa.messagecenter.message.service;
 
+import com.dudu.soa.framework.pagehelp.DuduPageHelpUtil;
 import com.dudu.soa.messagecenter.message.api.ApiSmslogs;
 import com.dudu.soa.messagecenter.message.mapper.SmsLogsDao;
 import com.dudu.soa.messagecenter.message.module.SmsLogs;
@@ -33,6 +34,7 @@ public class SmsLogsService implements ApiSmslogs {
 
     @Override
     public ArrayList<SmsLogs> queryByParams(SmsLogs smsLogs) {
+        DuduPageHelpUtil.query("id");
         return smsLogsDao.queryByParams(smsLogs);
     }
 
