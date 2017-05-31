@@ -100,7 +100,7 @@ public class SendSmsService implements ApiSendSms {
 //获取短信签名
             signName = accessKey.getSignName();
 //获取是否启用
-            keyuse = accessKey.getkeyuse();
+            keyuse = accessKey.getKeyUse();
 
         }
 
@@ -276,7 +276,7 @@ public class SendSmsService implements ApiSendSms {
 //获取短信签名
             signName = accessKey.getSignName();
 //获取是否启用
-            keyuse = accessKey.getkeyuse();
+            keyuse = accessKey.getKeyUse();
         }
 
 //获取短信模板TemplateCode实体

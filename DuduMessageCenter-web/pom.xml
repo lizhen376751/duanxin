@@ -53,6 +53,14 @@
         	<artifactId>aliyun-java-sdk-core</artifactId>
         	<version>2.4.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.mns</groupId>
+            <artifactId>aliyun-sdk-mns</artifactId>
+            <version>1.1.8</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>

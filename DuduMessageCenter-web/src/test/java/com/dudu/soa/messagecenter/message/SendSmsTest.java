@@ -28,16 +28,16 @@ public class SendSmsTest extends TestBase{
 			list.add("18560042032");
 //			parameterEntry.setCarnum("carnum");
 //			parameterEntry.setDate("date");
-			parameterEntry.setParameter1("063233");
+//			parameterEntry.setParameter1("063233");
 //			parameterEntry.setParameter2("parameter2");
 //			parameterEntry.setParameter3("parameter3");
 //			parameterEntry.setParameter4("parameter4");
-//			parameterEntry.setSms("尊敬的12车主，您的车辆保险将于12到期。【天成车业】");
-//			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
-//			parameterEntry.setSmsUser("GL_tiancheng");
+			parameterEntry.setSms("尊敬的车主，感谢您在本店进行的消费，请问您对刚办理业务满意吗？(回复1-10之间任意数字，1分为不满意，10分为非常满意）【天成业主】");
+			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
+			parameterEntry.setSmsUser("GL_tiancheng");
 //			parameterEntry.setStoreName("storeName");
 //			System.out.println("+++=======短信实体类"+parameterEntry);
-		    sendSmsService.sendSMS("CS000", "验证码", list, parameterEntry);
+		    sendSmsService.sendSMS("0533001", null, list, parameterEntry);
 	}catch(Exception e){
 		e.printStackTrace();
 	}

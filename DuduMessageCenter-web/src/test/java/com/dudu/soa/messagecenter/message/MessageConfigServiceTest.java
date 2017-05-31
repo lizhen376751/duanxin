@@ -43,7 +43,7 @@ public class MessageConfigServiceTest extends TestBase{
 		accessKey.setAppSecret("短信Secret");
 		accessKey.setShopcode("店铺名");
 		accessKey.setSignName("短信签名");
-		accessKey.setkeyuse("true");
+		accessKey.setKeyUse("true");
 		messageConfigService.addAccessKey(accessKey);
 	};
 	
@@ -61,7 +61,7 @@ public class MessageConfigServiceTest extends TestBase{
 		accessKey.setAppSecret("短信1Secret");
 		accessKey.setShopcode("店铺1code");
 		accessKey.setSignName("短信签名1");
-		accessKey.setkeyuse("false");
+		accessKey.setKeyUse("false");
 		messageConfigService.updateAccessKey(accessKey);
 	};
 	
