@@ -9,13 +9,12 @@ import java.util.List;
  */
 public interface ApiSendSms {
     /**
-     *
-     * @param shopcode 店铺代码
+     *  @param shopcode 店铺代码
      * @param businessType 业务类型
      * @param recnum 手机号码List集合
      * @param parameterEntry 参数实体
      */
-     void sendSMS(String shopcode, String businessType, List<String> recnum, ParameterEntry parameterEntry);
+     String sendSMS(String shopcode, String businessType, List<String> recnum, ParameterEntry parameterEntry);
 
     /**
      *

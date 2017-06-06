@@ -12,7 +12,7 @@ import com.dudu.soa.messagecenter.message.service.MessageConfigService;
 
 public class MessageConfigServiceTest extends TestBase{
 	
-	private static Logger logger = LoggerFactory.getLogger(SendSmsTest.class); 
+	private static Logger logger = LoggerFactory.getLogger(MessageConfigServiceTest.class);
 	@Autowired
 	private MessageConfigService messageConfigService;
 
@@ -20,8 +20,8 @@ public class MessageConfigServiceTest extends TestBase{
 	public void queryAccessKey(){
 		AccessKey queryListAccessKey = messageConfigService.getAccessKey("0533001");
 		System.out.println(queryListAccessKey);
-	};
-	
+	}
+
 	@Test
 	public void queryListAccessKey(){
 		try {
@@ -31,7 +31,7 @@ public class MessageConfigServiceTest extends TestBase{
 			e.printStackTrace();
 		}
 		
-	};
+	}
 	
 	
 	@Test
@@ -45,7 +45,7 @@ public class MessageConfigServiceTest extends TestBase{
 		accessKey.setSignName("短信签名");
 		accessKey.setKeyUse("true");
 		messageConfigService.addAccessKey(accessKey);
-	};
+	}
 	
 	
 	@Test
@@ -63,26 +63,26 @@ public class MessageConfigServiceTest extends TestBase{
 		accessKey.setSignName("短信签名1");
 		accessKey.setKeyUse("false");
 		messageConfigService.updateAccessKey(accessKey);
-	};
+	}
 	
 	
 	@Test
 	public void queryTemplateCode(){
 		TemplateCode queryTemplateCode = messageConfigService.getTemplateCode("CS000", "验证码");
 		logger.debug("TemplateCode实体为:"+queryTemplateCode.toString());
-	};
+	}
 	@Test
 	public void getByidTemplate(){
 		TemplateCode queryTemplateCode = messageConfigService.getByidTemplate(24);
 		logger.debug("TemplateCode实体为:"+queryTemplateCode.toString());
-	};
+	}
 	
 	@Test
 	public void queryListTemplate(){
 		java.util.List<TemplateCode> queryListTemplate = messageConfigService.queryListTemplate("0533001");
 		System.out.println("list集合为:"+queryListTemplate);
 		logger.debug("list集合为:"+queryListTemplate.toString());
-	};
+	}
 	
 //	
 	@Test
@@ -94,7 +94,7 @@ public class MessageConfigServiceTest extends TestBase{
 		templateCode.setTemplateCode("templateCode");
 		templateCode.setTemplateUse("false");
 		messageConfigService.addTemplateCode(templateCode);
-	};
+	}
 	
 	@Test
 	
@@ -105,7 +105,7 @@ public class MessageConfigServiceTest extends TestBase{
 			e.printStackTrace();
 		}
 		
-	};
+	}
 	
 	@Test
 	public void updateTemplate(){
@@ -115,7 +115,7 @@ public class MessageConfigServiceTest extends TestBase{
 		templateCode.setShopCode("shopCode1");
 		templateCode.setTemplateCode("templateCode1");
 		messageConfigService.updateTemplate(templateCode);
-	};
+	}
 }
 
 	

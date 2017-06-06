@@ -23,21 +23,20 @@ public class SendSmsTest extends TestBase{
 	public void sendSMS() throws Exception{
 		try{
 			ParameterEntry  parameterEntry = new ParameterEntry();
-
 			List<String> list = new ArrayList();
 			list.add("18560042032");
-//			parameterEntry.setCarnum("carnum");
-//			parameterEntry.setDate("date");
-//			parameterEntry.setParameter1("063233");
-//			parameterEntry.setParameter2("parameter2");
-//			parameterEntry.setParameter3("parameter3");
-//			parameterEntry.setParameter4("parameter4");
-			parameterEntry.setSms("尊敬的车主，感谢您在本店进行的消费，请问您对刚办理业务满意吗？(回复1-10之间任意数字，1分为不满意，10分为非常满意）【天成业主】");
-			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
-			parameterEntry.setSmsUser("GL_tiancheng");
-//			parameterEntry.setStoreName("storeName");
-//			System.out.println("+++=======短信实体类"+parameterEntry);
-		    sendSmsService.sendSMS("0533001", null, list, parameterEntry);
+			parameterEntry.setCarnum("carnum");
+			parameterEntry.setDate("date");
+			parameterEntry.setParameter1("063233");
+			parameterEntry.setParameter2("parameter2");
+			parameterEntry.setParameter3("parameter3");
+			parameterEntry.setParameter4("parameter4");
+//			parameterEntry.setSms("尊敬的鲁a2032车主，感谢您在福州美车会汽车美容会所进行的消费，您有任何问题和意见可以随时进行咨询及反馈,请您对本次服务进行评,感谢您的支持，祝您生活愉快!(回复1为不满意，2为满意）【天成业主】");
+//			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
+//			parameterEntry.setSmsUser("GL_tiancheng");
+			parameterEntry.setStoreName("storeName");
+			System.out.println("+++=======短信实体类"+parameterEntry);
+		    sendSmsService.sendSMS("000001", "验证码", list, parameterEntry);
 	}catch(Exception e){
 		e.printStackTrace();
 	}

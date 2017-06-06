@@ -9,6 +9,8 @@
         <result property="appSecret" column="appSecret"/>
         <result property="signName" column="signName"/>
         <result property="shopcode" column="shopcode"/>
+        <result property="endpoint" column="endpoint"/>
+        <result property="topic" column="topic"/>
         <result property="keyUse" column="keyUse"/>
     </resultMap>
     <resultMap type="com.dudu.soa.messagecenter.message.module.TemplateCode" id="templateCode">
@@ -31,7 +33,7 @@ where
 
     <select id="getAccessKey" parameterType="String" resultMap="accessKey">
 select top 1
- 	a.id,a.appkey,a.appSecret,a.shopcode,a.signName,a.keyuse
+ 	a.id,a.appkey,a.appSecret,a.shopcode,a.signName,a.endpoint,a.topic,a.keyuse
 FROM 
 	SMS_AccessKey a 
 where  
