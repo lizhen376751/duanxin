@@ -1,24 +1,12 @@
 package com.dudu.soa.messagecenter.message.module;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 调用短信接口所需要的参数封装为实体类
  */
 public class ParameterEntry implements Serializable {
-    /**
-     * 店铺编码(必传)
-     */
-    private String shopCode;
-    /**
-     * 短信的业务类型(必传)
-     */
-    private String businessType;
-    /**
-     * 需要发送的手机号码(必传)
-     */
-    private List<String> recnum;
+
 
     /**
      * 车牌号
@@ -77,69 +65,8 @@ public class ParameterEntry implements Serializable {
      */
     @Override
     public String toString() {
-        return "shopCode:" + shopCode + ",businessType:" + businessType + ",recnum:" + recnum + ",carnum:" + carnum + ",date:" + date + ",storeName:" + storeName
-                + ",sms:" + sms + ",smsUser:" + smsUser + ",smsPwd:" + smsPwd + ",parameter1:" + parameter1 + ",parameter2:" + parameter2 + ",parameter3:" + parameter3
-                + ",parameter4:" + parameter4;
-    }
-
-    /**
-     * 获取 店铺编码(必传)
-     *
-     * @return shopCode 店铺编码(必传)
-     */
-    public String getShopCode() {
-        return this.shopCode;
-    }
-
-    /**
-     * 设置 店铺编码(必传)
-     *
-     * @param shopCode 店铺编码(必传)
-     * @return 返回 ParameterEntry(调用短信接口所需要的参数封装为实体类)
-     */
-    public ParameterEntry setShopCode(String shopCode) {
-        this.shopCode = shopCode;
-        return this;
-    }
-
-    /**
-     * 获取 短信的业务类型(必传)
-     *
-     * @return businessType 短信的业务类型(必传)
-     */
-    public String getBusinessType() {
-        return this.businessType;
-    }
-
-    /**
-     * 设置 短信的业务类型(必传)
-     *
-     * @param businessType 短信的业务类型(必传)
-     * @return 返回 ParameterEntry(调用短信接口所需要的参数封装为实体类)
-     */
-    public ParameterEntry setBusinessType(String businessType) {
-        this.businessType = businessType;
-        return this;
-    }
-
-    /**
-     * 获取 需要发送的手机号码(必传)
-     *
-     * @return recnum 需要发送的手机号码(必传)
-     */
-    public List<String> getRecnum() {
-        return this.recnum;
-    }
-
-    /**
-     * 设置 需要发送的手机号码(必传)
-     *
-     * @param recnum 需要发送的手机号码(必传)
-     * @return 返回 ParameterEntry(调用短信接口所需要的参数封装为实体类)
-     */
-    public ParameterEntry setRecnum(List<String> recnum) {
-        this.recnum = recnum;
-        return this;
+        return "carnum:" + carnum + ",date:" + date + ",storeName:" + storeName + ",sms:" + sms + ",smsUser:" + smsUser + ",smsPwd:" + smsPwd
+                + ",parameter1:" + parameter1 + ",parameter2:" + parameter2 + ",parameter3:" + parameter3 + ",parameter4:" + parameter4;
     }
 
     /**
