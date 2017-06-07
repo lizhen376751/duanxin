@@ -63,8 +63,9 @@ public class NewMessageService {
          * Step 1. 获取主题引用
          *
          */
-//        CloudAccount account = new CloudAccount("LTAI1TaGHkgHnQlh", "bmjmiW2SYYGnqmSyNLWXA94yP5AKGj", "https://1865687059384333.mns.cn-hangzhou.aliyuncs.com/");
-        CloudAccount account = new CloudAccount("LTAItFAKjkOvqssX", "PVpsm30Lz2B1URtUZXs4wRa8sYNTHN", "https://1458672996257650.mns.cn-hangzhou.aliyuncs.com/");
+//        CloudAccount account = new CloudAccount("LTAIFX8cew3HdZlh", "MyvuASaBe0iyygiG6vFfHCfRKjfxu5", "https://1294225092894123.mns.cn-hangzhou.aliyuncs.com");
+        CloudAccount account = new CloudAccount("LTAItFAKjkOvqssX", "bmjmiW2SYYGnqmSyNLWXA94yP5AKGj", "https://1865687059384333.mns.cn-hangzhou.aliyuncs.com");
+//        CloudAccount account = new CloudAccount("LTAI1TaGHkgHnQlh", "PVpsm30Lz2B1URtUZXs4wRa8sYNTHN", "https://1458672996257650.mns.cn-hangzhou.aliyuncs.com/");
         MNSClient client = account.getMNSClient();
         CloudTopic topic = client.getTopicRef("sms.topic-cn-hangzhou");
         /**
@@ -80,18 +81,24 @@ public class NewMessageService {
         MessageAttributes messageAttributes = new MessageAttributes();
         BatchSmsAttributes batchSmsAttributes = new BatchSmsAttributes();
 
-//        // 3.1 设置发送短信的签名（SMSSignName）
-//        batchSmsAttributes.setFreeSignName("生日祝福");
-//        // 3.2 设置发送短信使用的模板（SMSTempateCode）
-//        batchSmsAttributes.setTemplateCode("SMS_62615074");
 
         // 3.1 设置发送短信的签名（SMSSignName）
-        batchSmsAttributes.setFreeSignName("怡人怡车");
+        batchSmsAttributes.setFreeSignName("生日祝福");
         // 3.2 设置发送短信使用的模板（SMSTempateCode）
-        batchSmsAttributes.setTemplateCode("SMS_62615074");
+        batchSmsAttributes.setTemplateCode("SMS_53140197");
+
+//        // 3.1 设置发送短信的签名（SMSSignName）
+//        batchSmsAttributes.setFreeSignName("易路邦");
+//        // 3.2 设置发送短信使用的模板（SMSTempateCode）
+//        batchSmsAttributes.setTemplateCode("SMS_62835439");
+
+//        // 3.1 设置发送短信的签名（SMSSignName）
+//        batchSmsAttributes.setFreeSignName("怡人怡车");
+//        // 3.2 设置发送短信使用的模板（SMSTempateCode）
+//        batchSmsAttributes.setTemplateCode("SMS_62615074");
         // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
         BatchSmsAttributes.SmsReceiverParams smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams();
-        smsReceiverParams.setParam("parameter1", "你好");
+//        smsReceiverParams.setParam("parameter1", "你好");
         smsReceiverParams.setParam("parameter1", "18560042032");
         // 3.4 增加接收短信的号码
         batchSmsAttributes.addSmsReceiver("18560042032", smsReceiverParams);

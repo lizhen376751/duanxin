@@ -25,18 +25,18 @@ public class SendSmsTest extends TestBase{
 			ParameterEntry  parameterEntry = new ParameterEntry();
 			List<String> list = new ArrayList();
 			list.add("18560042032");
-			parameterEntry.setCarnum("鲁A15155");
-			parameterEntry.setDate("2017.5.2");
-			parameterEntry.setParameter1("消费");
-			parameterEntry.setParameter2("000000");
-			parameterEntry.setParameter3("39元");
-			parameterEntry.setParameter4("parameter4");
-//			parameterEntry.setSms("尊敬的鲁a2032车主，感谢您在福州美车会汽车美容会所进行的消费，您有任何问题和意见可以随时进行咨询及反馈,请您对本次服务进行评,感谢您的支持，祝您生活愉快!(回复1为不满意，2为满意）【天成业主】");
-//			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
-//			parameterEntry.setSmsUser("GL_tiancheng");
-			parameterEntry.setStoreName("北京经典");
+//			parameterEntry.setCarnum("鲁A15155");
+//			parameterEntry.setDate("2017.5.2");
+//			parameterEntry.setParameter1("消费");
+//			parameterEntry.setParameter2("000000");
+//			parameterEntry.setParameter3("39元");
+//			parameterEntry.setParameter4("parameter4");
+			parameterEntry.setSms("尊敬的鲁a2032车主，感谢您在福州美车会汽车美容会所进行的消费，您有任何问题和意见可以随时进行咨询及反馈,请您对本次服务进行评,感谢您的支持，祝您生活愉快!(回复1为不满意，2为满意）【天成业主】");
+			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
+			parameterEntry.setSmsUser("GL_tiancheng");
+//			parameterEntry.setStoreName("北京经典");
 			logger.info("+++=======短信实体类"+parameterEntry);
-			String s = sendSmsService.sendSMS("lizhen", "卡相关", list, parameterEntry);
+			String s = sendSmsService.sendSMS("", "", list, parameterEntry);
 			logger.info("+++=======短信发送状态"+s);
 
 		}catch(Exception e){

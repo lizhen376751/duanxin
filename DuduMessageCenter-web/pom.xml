@@ -43,6 +43,7 @@
             <artifactId>DuduMessageCenter-api</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <!--短信-->
         <dependency>
         	<groupId>com.aliyun</groupId>
         	<artifactId>aliyun-java-sdk-sms</artifactId>
@@ -60,6 +61,9 @@
             <version>1.1.8</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
+        <!--短信-->
+
+
 
     </dependencies>
     <build>
