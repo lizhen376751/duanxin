@@ -12,7 +12,7 @@ public final class DuduJgMsgUtil {
 
     /**
      * 获取默认默认的极光推送 通知title
-     * @return
+     * @return 字符串
      */
     public static String getDefaultNotificationTitle() {
         return "嘟嘟店管家";
