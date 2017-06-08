@@ -95,14 +95,14 @@ WHERE 1=1
 	phonenum,
 	carnum,
 	smsname,
-	date,
+	[date],
 	state,
 	cause,
 	shopcode
 )
 VALUES
 	(
-		#{ phonenum }, #{ carnum }, #{ smsname }, #{ date },#{ state },#{ cause },#{ shopcode }
+		#{phonenum}, #{carnum}, #{smsname}, #{date},#{state},#{cause},#{shopcode}
 	)
 </insert>
 
