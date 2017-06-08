@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,6 +81,7 @@ public class SendSmsService implements ApiSendSms {
      * @param parameterEntry 实体类
      * @return 是否发送成功或错误原因
      */
+    @Transactional
     public String sendSMS(String shopcode, String businessType,
                           List<String> recnum, ParameterEntry parameterEntry) {
 
