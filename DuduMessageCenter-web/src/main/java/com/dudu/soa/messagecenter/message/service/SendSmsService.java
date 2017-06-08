@@ -19,7 +19,6 @@ import com.dudu.soa.messagecenter.message.mapper.MessageConfigDao;
 import com.dudu.soa.messagecenter.message.mapper.SmsLogsDao;
 import com.dudu.soa.messagecenter.message.module.AccessKey;
 import com.dudu.soa.messagecenter.message.module.ParameterEntry;
-import com.dudu.soa.messagecenter.message.module.SmsLogs;
 import com.dudu.soa.messagecenter.message.module.TemplateCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +31,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -223,34 +220,34 @@ public class SendSmsService implements ApiSendSms {
             feedback = e.getMessage();
         }
 
-        if (recnum.size() > 0) {
-            for (int i = 0; i < recnum.size(); i++) {
-                SmsLogs smsLogs = new SmsLogs();
-                //创建短信记录的实体类
-                smsLogs.setCarnum(carnum);
-                SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
-                String date1 = sdf.format(new Date());
-                smsLogs.setDate(date1);
-                smsLogs.setShopcode(shopcode);
-                smsLogs.setSmsname(businessType);
-                smsLogs.setPhonenum(recnum.get(i));
-                if (!state.equals("成功")) {
-                    state = "失败";
-                    if (accessKey == null) {
-                        feedback = "阿里云账号配置错误!";
-                    }
-                    if (templateCodes == null) {
-                        feedback = "短信模板配置错误!";
-                    }
-                    if (accessKey == null && templateCodes == null) {
-                        feedback = "阿里云账号,短信模板配置错误!";
-                    }
-                }
-                smsLogs.setState(state);
-                smsLogs.setCause(feedback);
-                smsLogsDao.addSmsLogs(smsLogs);
-            }
-        }
+//        if (recnum.size() > 0) {
+//            for (int i = 0; i < recnum.size(); i++) {
+//                SmsLogs smsLogs = new SmsLogs();
+//                //创建短信记录的实体类
+//                smsLogs.setCarnum(carnum);
+//                SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
+//                String date1 = sdf.format(new Date());
+//                smsLogs.setDate(date1);
+//                smsLogs.setShopcode(shopcode);
+//                smsLogs.setSmsname(businessType);
+//                smsLogs.setPhonenum(recnum.get(i));
+//                if (!state.equals("成功")) {
+//                    state = "失败";
+//                    if (accessKey == null) {
+//                        feedback = "阿里云账号配置错误!";
+//                    }
+//                    if (templateCodes == null) {
+//                        feedback = "短信模板配置错误!";
+//                    }
+//                    if (accessKey == null && templateCodes == null) {
+//                        feedback = "阿里云账号,短信模板配置错误!";
+//                    }
+//                }
+//                smsLogs.setState(state);
+//                smsLogs.setCause(feedback);
+//                smsLogsDao.addSmsLogs(smsLogs);
+//            }
+//        }
         return feedback;
     }
 

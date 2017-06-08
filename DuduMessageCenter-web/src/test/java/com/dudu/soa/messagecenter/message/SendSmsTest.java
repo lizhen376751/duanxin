@@ -26,17 +26,17 @@ public class SendSmsTest extends TestBase{
 			List<String> list = new ArrayList();
 			list.add("18560042032");
 //			parameterEntry.setCarnum("鲁A15155");
-//			parameterEntry.setDate("2017.5.2");
-//			parameterEntry.setParameter1("消费");
-//			parameterEntry.setParameter2("000000");
-//			parameterEntry.setParameter3("39元");
-//			parameterEntry.setParameter4("parameter4");
-			parameterEntry.setSms("尊敬的鲁a2032车主，感谢您在福州美车会汽车美容会所进行的消费，您有任何问题和意见可以随时进行咨询及反馈,请您对本次服务进行评,感谢您的支持，祝您生活愉快!(回复1为不满意，2为满意）【天成业主】");
+			parameterEntry.setDate("6月8日17:01");
+			parameterEntry.setParameter1("消费清洗座椅:1.00次");
+			parameterEntry.setParameter2("203201");
+			parameterEntry.setParameter3("清洗座椅:3.00次(2018-06-07)");
+			parameterEntry.setParameter4(null);
+			parameterEntry.setSms("尊敬的鲁a2032车主，您于6月8日17:01时在福州美车会汽车美容会所消费清洗座椅:1.00次，您卡内还剩余清洗座椅:3.00次(2018-06-07)。【天成业主】");
 			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
 			parameterEntry.setSmsUser("GL_tiancheng");
-//			parameterEntry.setStoreName("北京经典");
+			parameterEntry.setStoreName("福州美车会汽车美容会所");
 			logger.info("+++=======短信实体类"+parameterEntry);
-			String s = sendSmsService.sendSMS("", "", list, parameterEntry);
+			String s = sendSmsService.sendSMS("0533001", "卡相关", list, parameterEntry);
 			logger.info("+++=======短信发送状态"+s);
 
 		}catch(Exception e){
