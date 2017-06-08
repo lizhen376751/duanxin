@@ -183,7 +183,7 @@ public class SendSmsService implements ApiSendSms {
                 log.info("MessageId: " + ret.getMessageId());
                 log.info("MessageMD5: " + ret.getMessageBodyMD5());
                 state = "成功";
-                feedback = "发送成功";
+                feedback = "阿里云短信发送成功";
                 client.close();
             } else if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty()
                     && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
@@ -215,12 +215,12 @@ public class SendSmsService implements ApiSendSms {
                 InputStream is = url.openStream();
                 log.info("创瑞短信发送模式");
                 state = "成功";
-                feedback = convertStreamToString(is); //返回值
+                feedback = convertStreamToString(is).substring(0, 50); //返回值
             }
         } catch (Exception e) {
             e.printStackTrace();
             state = "失败";
-            feedback = e.getMessage().substring(0, 150);
+            feedback = e.getMessage();
         }
 
         if (recnum.size() > 0) {
@@ -429,7 +429,13 @@ public class SendSmsService implements ApiSendSms {
                 e.printStackTrace();
             }
         }
-        return sb1.toString();
+        String ss = "";
+        if (sb1.toString().length() > 51) {
+            ss = sb1.toString().substring(0, 50);
+        } else {
+            ss = sb1.toString();
+        }
+        return ss;
     }
 
     /**
