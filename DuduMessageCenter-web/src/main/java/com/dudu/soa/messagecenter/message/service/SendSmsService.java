@@ -220,7 +220,7 @@ public class SendSmsService implements ApiSendSms {
         } catch (Exception e) {
             e.printStackTrace();
             state = "失败";
-            feedback = e.getMessage();
+            feedback = e.getMessage().substring(0, 150);
         }
 
         if (recnum.size() > 0) {
