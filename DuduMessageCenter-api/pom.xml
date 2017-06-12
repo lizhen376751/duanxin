@@ -10,16 +10,5 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>DuduMessageCenter-api</artifactId>
     <version>${parent.version}</version>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+
 </project>

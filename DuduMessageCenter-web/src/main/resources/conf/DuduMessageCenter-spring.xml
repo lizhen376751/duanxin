@@ -9,10 +9,10 @@
     <dubbo:protocol name="dubbo" port="${dubbo.application.port}" host="${dubbo.application.host}"/>
 
     <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig" ref="messageConfigService"
-                   version="0.0.1" owner="lizhen"/>
-    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms" ref="sendSmsService" version="0.0.1"
                    owner="lizhen"/>
-    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs" ref="smsLogsService" version="0.0.1"
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms" ref="sendSmsService"
+                   owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs" ref="smsLogsService"
                    owner="lizhen"/>
 
     <dubbo:service interface="com.dudu.soa.messagecenter.jgmsg.api.ApiJgPushIntf" ref="jgPushAdapter" owner="frank"/>
