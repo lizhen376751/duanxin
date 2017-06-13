@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by lizhen on 2017/5/22.
  */
 
-public class NewMessageService {
+class NewMessageService {
 
     //    $YourAccessId，阿里云AccessId，可在“步骤一”获取（登陆阿里云 AccessKey 管理页面创建、查看）
 //    $YourAccessKey，阿里云AccessKey，可在“步骤一”获取（登陆阿里云 AccessKey 管理页面创建、查看）
