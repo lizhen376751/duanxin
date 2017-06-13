@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class NewMessageService {
+
     //    $YourAccessId，阿里云AccessId，可在“步骤一”获取（登陆阿里云 AccessKey 管理页面创建、查看）
 //    $YourAccessKey，阿里云AccessKey，可在“步骤一”获取（登陆阿里云 AccessKey 管理页面创建、查看）
 //    $YourMNSEndpoint，访问MNS服务的接入地址，可在“步骤一”获取（登陆MNS控制台，单击右上角“获取Endpoint”查看，选择公网地址）
