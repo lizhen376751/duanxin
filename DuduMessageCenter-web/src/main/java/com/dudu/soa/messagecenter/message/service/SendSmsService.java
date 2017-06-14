@@ -215,7 +215,7 @@ public class SendSmsService implements ApiSendSms {
                 InputStream is = url.openStream();
                 log.info("创瑞短信发送模式");
                 state = "成功";
-                feedback = convertStreamToString(is).substring(0, 50); //返回值
+                feedback = convertStreamToString(is); //返回值
             }
         } catch (Exception e) {
             e.printStackTrace();
