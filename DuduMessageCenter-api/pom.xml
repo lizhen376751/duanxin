@@ -11,4 +11,11 @@
     <artifactId>DuduMessageCenter-api</artifactId>
     <version>${parent.version}</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
