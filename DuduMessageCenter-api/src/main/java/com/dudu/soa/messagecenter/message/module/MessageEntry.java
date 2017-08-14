@@ -9,11 +9,11 @@ import java.util.List;
  * Created by lizhen on 2017/8/14.
  */
 
-public class MessageEntry implements Serializable{
+public class MessageEntry implements Serializable {
     /**
      * 店铺编码
      */
-    private  String shopcode;
+    private String shopcode;
     /**
      * 业务类型
      */
@@ -27,7 +27,7 @@ public class MessageEntry implements Serializable{
      */
     private String carnum;
     /**
-     *日期
+     * 日期
      */
     private String date;
     /**
@@ -64,9 +64,9 @@ public class MessageEntry implements Serializable{
     private String parameter4;
 
 
-
     /**
-     *  MessageEntry(短信接口发送实体类) 字符串形式
+     * MessageEntry(短信接口发送实体类) 字符串形式
+     *
      * @return MessageEntry(短信接口发送实体类)字符串
      */
     @Override
@@ -78,6 +78,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 店铺编码
+     *
      * @return shopcode 店铺编码
      */
     public String getShopcode() {
@@ -86,6 +87,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 店铺编码
+     *
      * @param shopcode 店铺编码
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -96,6 +98,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 业务类型
+     *
      * @return businessType 业务类型
      */
     public String getBusinessType() {
@@ -104,6 +107,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 业务类型
+     *
      * @param businessType 业务类型
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -114,6 +118,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 电话号码集合
+     *
      * @return list 电话号码集合
      */
     public List<String> getList() {
@@ -122,6 +127,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 电话号码集合
+     *
      * @param list 电话号码集合
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -132,6 +138,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 车牌号
+     *
      * @return carnum 车牌号
      */
     public String getCarnum() {
@@ -140,6 +147,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 车牌号
+     *
      * @param carnum 车牌号
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -150,6 +158,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 日期
+     *
      * @return date 日期
      */
     public String getDate() {
@@ -158,6 +167,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 日期
+     *
      * @param date 日期
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -168,6 +178,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 店铺名称
+     *
      * @return storeName 店铺名称
      */
     public String getStoreName() {
@@ -176,6 +187,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 店铺名称
+     *
      * @param storeName 店铺名称
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -186,6 +198,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 短信签名
+     *
      * @return sms 短信签名
      */
     public String getSms() {
@@ -194,6 +207,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 短信签名
+     *
      * @param sms 短信签名
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -204,6 +218,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 创瑞登录名
+     *
      * @return smsUser 创瑞登录名
      */
     public String getSmsUser() {
@@ -212,6 +227,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 创瑞登录名
+     *
      * @param smsUser 创瑞登录名
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -222,6 +238,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 创瑞密码
+     *
      * @return smsPwd 创瑞密码
      */
     public String getSmsPwd() {
@@ -230,6 +247,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 创瑞密码
+     *
      * @param smsPwd 创瑞密码
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -240,6 +258,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 参数1
+     *
      * @return parameter1 参数1
      */
     public String getParameter1() {
@@ -248,6 +267,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 参数1
+     *
      * @param parameter1 参数1
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -258,6 +278,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 参数2
+     *
      * @return parameter2 参数2
      */
     public String getParameter2() {
@@ -266,6 +287,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 参数2
+     *
      * @param parameter2 参数2
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -276,6 +298,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 参数3
+     *
      * @return parameter3 参数3
      */
     public String getParameter3() {
@@ -284,6 +307,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 参数3
+     *
      * @param parameter3 参数3
      * @return 返回 MessageEntry(短信接口发送实体类)
      */
@@ -294,6 +318,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 获取 参数4
+     *
      * @return parameter4 参数4
      */
     public String getParameter4() {
@@ -302,6 +327,7 @@ public class MessageEntry implements Serializable{
 
     /**
      * 设置 参数4
+     *
      * @param parameter4 参数4
      * @return 返回 MessageEntry(短信接口发送实体类)
      */

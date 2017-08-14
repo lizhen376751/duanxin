@@ -23,7 +23,7 @@ public interface ApiSendSms {
      * 短信发送和第一个一样的,只不过入参不一样
      *
      * @param messageEntry 短信参数实体类
-     * @return
+     * @return 是否发送成功
      */
     String sendSMS2(MessageEntry messageEntry);
 }
