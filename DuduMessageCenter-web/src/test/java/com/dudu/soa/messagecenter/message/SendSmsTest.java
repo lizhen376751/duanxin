@@ -1,6 +1,7 @@
 package com.dudu.soa.messagecenter.message;
 
 import com.dudu.soa.messagecenter.TestBase;
+import com.dudu.soa.messagecenter.message.module.MessageEntry;
 import com.dudu.soa.messagecenter.message.module.ParameterEntry;
 import com.dudu.soa.messagecenter.message.service.SendSmsService;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class SendSmsTest extends TestBase{
 	@Test
 	public void sendSMS2() throws Exception{
 		try{
-			ParameterEntry  parameterEntry = new ParameterEntry();
+			MessageEntry parameterEntry = new MessageEntry();
 			List<String> list = new ArrayList();
 			list.add("18560042");
 			parameterEntry.setCarnum("carnum");
@@ -61,8 +62,9 @@ public class SendSmsTest extends TestBase{
 			parameterEntry.setSmsPwd("A3934081D6F869C3295618159571");
 			parameterEntry.setSmsUser("GL_tiancheng");
 			parameterEntry.setStoreName("storeName");
+			parameterEntry.setList(list);
 			System.out.println("+++=======短信实体类"+parameterEntry);
-		    String sendSMS2 = sendSmsService.sendSMS2("", "测试", list, parameterEntry);
+		    String sendSMS2 = sendSmsService.sendSMS2(parameterEntry);
 		    System.out.println(sendSMS2);
 		}catch(Exception e){
 		e.printStackTrace();

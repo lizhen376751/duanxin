@@ -1,6 +1,5 @@
 package com.dudu.soa.messagecenter.message.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.aliyun.mns.client.CloudAccount;
 import com.aliyun.mns.client.CloudTopic;
 import com.aliyun.mns.client.MNSClient;
@@ -8,16 +7,11 @@ import com.aliyun.mns.model.BatchSmsAttributes;
 import com.aliyun.mns.model.MessageAttributes;
 import com.aliyun.mns.model.RawTopicMessage;
 import com.aliyun.mns.model.TopicMessage;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
-import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
-import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.dudu.soa.messagecenter.message.api.ApiSendSms;
 import com.dudu.soa.messagecenter.message.mapper.MessageConfigDao;
 import com.dudu.soa.messagecenter.message.mapper.SmsLogsDao;
 import com.dudu.soa.messagecenter.message.module.AccessKey;
+import com.dudu.soa.messagecenter.message.module.MessageEntry;
 import com.dudu.soa.messagecenter.message.module.ParameterEntry;
 import com.dudu.soa.messagecenter.message.module.SmsLogs;
 import com.dudu.soa.messagecenter.message.module.TemplateCode;
@@ -82,6 +76,7 @@ public class SendSmsService implements ApiSendSms {
      * @return 是否发送成功或错误原因
      */
     @Transactional
+    @Override
     public String sendSMS(String shopcode, String businessType,
                           List<String> recnum, ParameterEntry parameterEntry) {
 
@@ -255,154 +250,6 @@ public class SendSmsService implements ApiSendSms {
     }
 
 
-//    /**
-//     * @Title: 创瑞短信发送方式
-//     * @Description: TODO(商品绑定直属下级)
-//     * @param: @param shopProductAddOrUpd
-//     * @param: @return
-//     */
-//
-//    @Override
-//    public String sendSMS(String shopcode, String businessType,
-//                          List<String> recnum, ParameterEntry parameterEntry) {
-//        String carnum = parameterEntry.getCarnum();
-//        String storeName = parameterEntry.getStoreName();
-//        String date = parameterEntry.getDate();
-//        String parameter1 = parameterEntry.getParameter1();
-//        String parameter2 = parameterEntry.getParameter2();
-//        String parameter3 = parameterEntry.getParameter3();
-//        String parameter4 = parameterEntry.getParameter4();
-//
-//        String sms = parameterEntry.getSms();
-//        String smsPwd = parameterEntry.getSmsPwd();
-//        String smsUser = parameterEntry.getSmsUser();
-//
-//
-////获取AccessKey实体
-//        String appkey = "";
-//        String appSecret = "";
-//        String signName = "";
-//        String keyuse = "";
-//        AccessKey accessKey = messageConfigDao.getAccessKey(shopcode);
-//        if (accessKey != null) {
-//            appkey = accessKey.getAppkey();
-//            appSecret = accessKey.getAppSecret();
-////获取短信签名
-//            signName = accessKey.getSignName();
-////获取是否启用
-//            keyuse = accessKey.getKeyUse();
-//
-//        }
-//
-////获取短信模板TemplateCode实体
-//        String templateCode = "";
-//        String templateUse = "";
-//        TemplateCode templateCodes = messageConfigService.getTemplateCode(shopcode, businessType);
-//        if (templateCodes != null && !"".equals(templateCodes)) {
-////短信模板code
-//            templateCode = templateCodes.getTemplateCode();
-////获取是否启用
-//            templateUse = templateCodes.getTemplateUse();
-//        }
-//
-//        String sendPhone = "";
-//        if (recnum.size() > 0) {
-//            for (int i = 0; i < recnum.size(); i++) {
-//                sendPhone += recnum.get(i);
-//                sendPhone += ",";
-//
-//            }
-//        }
-//        if (recnum.size() == 1) {
-//            sendPhone = recnum.get(0);
-//        }
-//
-//
-////        原来的短信模式不需要添加
-////        node.put("sms", sms);
-////        node.put("smsPwd", smsPwd);
-////        node.put("smsUser", smsUser);
-//
-//
-////创建短信记录的实体类
-//        SmsLogs smsLogs = new SmsLogs();
-//        smsLogs.setCarnum(carnum);
-//        SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
-//        String date1 = sdf.format(new Date());
-//        smsLogs.setDate(date1);
-//        smsLogs.setPhonenum(sendPhone);
-//        smsLogs.setShopcode(shopcode);
-//        smsLogs.setSmsname(businessType);
-//        String state = "未发送";
-//        String feedback = "";
-//        if (accessKey == null) {
-//            feedback = "阿里云账号配置错误!";
-//        }
-//        if (templateCodes == null) {
-//            feedback = "短信模板配置错误!";
-//        }
-//        if (accessKey == null && templateCodes == null) {
-//            feedback = "阿里云账号,短信模板配置错误!";
-//        }
-//        try { //现在的短信模式
-//            if ("true".equals(keyuse) && "true".equals(templateUse)) {
-//                JSONObject node = new JSONObject();
-//                node.put("carnum", carnum);
-//                node.put("date", date);
-//                node.put("storeName", storeName);
-//                node.put("parameter1", parameter1);
-//                node.put("parameter2", parameter2);
-//                node.put("parameter3", parameter3);
-//                node.put("parameter4", parameter4);
-//                IClientProfile profile = DefaultProfile.getProfile(rEGIONID, appkey, appSecret);
-//                DefaultProfile.addEndpoint(rEGIONID, rEGIONID, "Sms", hOST);
-//                IAcsClient client = new DefaultAcsClient(profile);
-//                SingleSendSmsRequest request = new SingleSendSmsRequest();
-//                request.setSignName(signName); //控制台创建的签名名称
-//                request.setTemplateCode(templateCode); //控制台创建的模板CODE
-//                request.setParamString(node.toString()); //短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-//                request.setRecNum(sendPhone); //接收号码
-//                log.info("阿里云短信发送模式");
-//                SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
-//                state = "成功";
-////                return "短信发送成功!";
-//            } else {
-//                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty()
-//                        && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
-//                        && null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty()
-//                        && null != sms && sms.length() > 0 && !sms.isEmpty()) {
-////原来的短信发送模式
-//                    StringBuilder sb = new StringBuilder(aGOHOST);
-//                    sb.append("name=" + smsUser);
-//                    sb.append("&pwd=" + smsPwd);
-//                    sb.append("&mobile=" + sendPhone);
-//                    sb.append("&content=" + URLEncoder.encode(sms, "UTF-8"));
-//                    sb.append("&stime=");
-//                    sb.append("&sign=");
-//                    sb.append("&type=pt&extno=");
-//                    URL url = new URL(sb.toString());
-//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                    connection.setRequestMethod("POST");
-//                    InputStream is = url.openStream();
-//                    log.info("创瑞短信发送模式");
-//                    String returnStr = convertStreamToString(is); //返回值
-//                    state = "成功";
-////                    return "短信发送成功!";
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            state = "失败";
-//            feedback = feedback(e.getMessage().toString());
-//
-//        }
-//        smsLogs.setState(state);
-//        smsLogs.setCause(feedback);
-//        smsLogsDao.addSmsLogs(smsLogs);
-//        return "";
-//    }
-
-
     /**
      * 字符串的转换
      *
@@ -438,122 +285,32 @@ public class SendSmsService implements ApiSendSms {
         return ss;
     }
 
+
     /**
-     * @param shopcode       店铺代码
-     * @param businessType   业务类型
-     * @param recnum         手机号码List集合
-     * @param parameterEntry 参数实体
+     * 短信发送和第一个一样的,只不过入参不一样
+     *
+     * @param messageEntry 短信参数实体类
      * @return
      */
     @Override
-    public String sendSMS2(String shopcode, String businessType,
-                           List<String> recnum, ParameterEntry parameterEntry) {
-        String feedback = "";
-        String carnum = parameterEntry.getCarnum();
-        String storeName = parameterEntry.getStoreName();
-        String date = parameterEntry.getDate();
-        String parameter1 = parameterEntry.getParameter1();
-        String parameter2 = parameterEntry.getParameter2();
-        String parameter3 = parameterEntry.getParameter3();
-        String parameter4 = parameterEntry.getParameter4();
-
-        String sms = parameterEntry.getSms();
-        String smsPwd = parameterEntry.getSmsPwd();
-        String smsUser = parameterEntry.getSmsUser();
-
-
-//获取AccessKey实体
-        String appkey = "";
-        String appSecret = "";
-        String signName = "";
-        String keyuse = "";
-        AccessKey accessKey = messageConfigDao.getAccessKey(shopcode);
-        if (null != accessKey) {
-            appkey = accessKey.getAppkey();
-            appSecret = accessKey.getAppSecret();
-//获取短信签名
-            signName = accessKey.getSignName();
-//获取是否启用
-            keyuse = accessKey.getKeyUse();
-        }
-
-//获取短信模板TemplateCode实体
-        String templateCode = "";
-        String templateUse = "";
-        TemplateCode templateCodes = messageConfigService.getTemplateCode(shopcode, businessType);
-        if (templateCodes != null && !"".equals(templateCodes)) {
-//短信模板code
-            templateCode = templateCodes.getTemplateCode();
-//获取是否启用
-            templateUse = templateCodes.getTemplateUse();
-        }
-
-        String sendPhone = "";
-        if (recnum.size() > 0) {
-            for (int i = 0; i < recnum.size(); i++) {
-                sendPhone += recnum.get(i);
-                sendPhone += ",";
-
-            }
-        }
-        if (recnum.size() == 1) {
-            sendPhone = recnum.get(0);
-        }
-
-
-//原来的短信模式不需要添加
-//node.put("sms", sms);
-//node.put("smsPwd", smsPwd);
-//node.put("smsUser", smsUser);
-
-        try { //现在的短信模式
-            if ("true".equals(keyuse) && "true".equals(templateUse)) {
-                JSONObject node = new JSONObject();
-                node.put("carnum", carnum);
-                node.put("date", date);
-                node.put("storeName", storeName);
-                node.put("parameter1", parameter1);
-                node.put("parameter2", parameter2);
-                node.put("parameter3", parameter3);
-                node.put("parameter4", parameter4);
-                IClientProfile profile = DefaultProfile.getProfile(rEGIONID, appkey, appSecret);
-                DefaultProfile.addEndpoint(rEGIONID, rEGIONID, "Sms", hOST);
-                IAcsClient client = new DefaultAcsClient(profile);
-                SingleSendSmsRequest request = new SingleSendSmsRequest();
-                request.setSignName(signName); //控制台创建的签名名称
-                request.setTemplateCode(templateCode); //控制台创建的模板CODE
-                request.setParamString(node.toString()); //短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
-                request.setRecNum(sendPhone); //接收号码
-                SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
-                return "短信发送成功!";
-            } else {
-                if (null != smsUser && smsUser.length() > 0 && !smsUser.isEmpty()
-                        && null != recnum && recnum.size() > 0 && !recnum.isEmpty()
-                        && null != smsPwd && smsPwd.length() > 0 && !smsPwd.isEmpty()
-                        && null != sms && sms.length() > 0 && !sms.isEmpty()) {
-                    //原来的短信发送模式
-                    StringBuilder sb = new StringBuilder(aGOHOST);
-                    sb.append("name=" + smsUser);
-                    sb.append("&pwd=" + smsPwd);
-                    sb.append("&mobile=" + sendPhone);
-                    sb.append("&content=" + URLEncoder.encode(sms, "UTF-8"));
-                    sb.append("&stime=");
-                    sb.append("&sign=");
-                    sb.append("&type=pt&extno=");
-                    URL url = new URL(sb.toString());
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    InputStream is = url.openStream();
-                    String returnStr = convertStreamToString(is); //返回值
-                    return "短信发送成功!";
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            feedback = feedback(e.toString());
-            return feedback;
-        }
-        return "短信未发送!";
+    public String sendSMS2(MessageEntry messageEntry) {
+        ParameterEntry parameterEntry = new ParameterEntry();
+        parameterEntry.setCarnum(messageEntry.getCarnum());
+        parameterEntry.setDate(messageEntry.getDate());
+        parameterEntry.setStoreName(messageEntry.getStoreName());
+        parameterEntry.setSms(messageEntry.getSms());
+        parameterEntry.setSmsPwd(messageEntry.getSmsPwd());
+        parameterEntry.setSms(messageEntry.getSms());
+        parameterEntry.setSmsUser(messageEntry.getSmsUser());
+        parameterEntry.setParameter1(messageEntry.getParameter1());
+        parameterEntry.setParameter2(messageEntry.getParameter2());
+        parameterEntry.setParameter3(messageEntry.getParameter3());
+        parameterEntry.setParameter4(messageEntry.getParameter4());
+        String shopcode = messageEntry.getShopcode();
+        String businessType = messageEntry.getBusinessType();
+        List<String> list = messageEntry.getList();
+        String sendSMS = sendSMS(shopcode, businessType, list, parameterEntry);
+        return sendSMS;
     }
 
 
