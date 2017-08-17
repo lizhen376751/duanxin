@@ -8,12 +8,9 @@
 
     <dubbo:protocol name="dubbo" port="${dubbo.application.port}" host="${dubbo.application.host}"/>
 
-    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig" ref="messageConfigService"
-                   owner="lizhen"/>
-    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms" ref="sendSmsService"
-                   owner="lizhen"/>
-    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs" ref="smsLogsService"
-                   owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiMessageConfig" ref="messageConfigService" timeout="3000" owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSendSms" ref="sendSmsService" timeout="3000" owner="lizhen"/>
+    <dubbo:service interface="com.dudu.soa.messagecenter.message.api.ApiSmslogs" ref="smsLogsService" timeout="3000" owner="lizhen"/>
 
     <dubbo:service interface="com.dudu.soa.messagecenter.jgmsg.api.ApiJgPushIntf" ref="jgPushAdapter" owner="frank"/>
 
