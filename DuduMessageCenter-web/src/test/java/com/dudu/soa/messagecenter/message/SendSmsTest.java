@@ -70,5 +70,25 @@ public class SendSmsTest extends TestBase{
 		e.printStackTrace();
 	}
 	}
+
+	//激活成功或者失败
+	@Test
+	public void sendSMS3() throws Exception{
+		try{
+			MessageEntry parameterEntry = new MessageEntry();
+			List<String> list = new ArrayList();
+			list.add("18560042032");
+			parameterEntry.setCarnum("鲁A2032");
+			parameterEntry.setDate("2018-11-15");
+			parameterEntry.setList(list);
+			parameterEntry.setShopcode("FL000");
+//			parameterEntry.setBusinessType("ActivationFailed");
+			parameterEntry.setBusinessType("ActivationSuccess");
+			String sendSMS2 = sendSmsService.sendSMS2(parameterEntry);
+			System.out.println(sendSMS2);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }
 
